@@ -1,0 +1,21 @@
+{
+  "name": "angular2-router-loader",
+  "version": "0.1.0",
+  "description": "A webpack loader for Angular 2 that enables string-based lazy loading with the router",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular2",
+    "webpack",
+    "loader",
+    "router",
+    "lazy-loading"
+  ],
+  "author": "Brandon Roberts",
+  "license": "MIT",
+  "dependencies": {
+    "loader-utils": "^0.2.15"
+  }
+}
