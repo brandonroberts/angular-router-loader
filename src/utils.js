@@ -32,7 +32,9 @@ module.exports.getFilename = function(resourcePath) {
 
 module.exports.normalizeFilePath = function(filePath) {
   if (os.platform() === 'win32') {
-    return filePath.replace(/\//g, '\\');
+    var path = filePath.replace(/\//g, '\\');
+
+    return path.replace(/\\/g, '\\\\');
   }
 
   return filePath;
