@@ -1,6 +1,6 @@
 {
   "name": "angular2-router-loader",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A webpack loader for Angular 2 that enables string-based lazy loading with the router",
   "main": "src/index.js",
   "scripts": {
