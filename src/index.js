@@ -40,6 +40,8 @@ module.exports = function(source, sourcemap) {
       filePath = path.join(relativeDir, filePath);
     }
 
+    filePath = utils.normalizeFilePath(filePath);
+
     if (loader === 'system') {
       return utils.getSystemLoader(filePath, moduleName);
     } else {

@@ -1,6 +1,7 @@
+var os = require('os');
 var path = require('path');
 
-function getRequireLoader(filePath, moduleName) {
+module.exports.getRequireLoader = function(filePath, moduleName) {
   var result = [
     'loadChildren: () => new Promise(function (resolve) {\n',
     '  (require as any).ensure([], function (require) {\n',
@@ -10,9 +11,9 @@ function getRequireLoader(filePath, moduleName) {
   ];
 
   return result.join('');
-}
+};
 
-function getSystemLoader(filePath, moduleName) {
+module.exports.getSystemLoader = function(filePath, moduleName) {
   var result = [
     'loadChildren: () => System.import(\'' + filePath + '\')\n',
     '  .then(function(module) {\n',
@@ -21,12 +22,18 @@ function getSystemLoader(filePath, moduleName) {
   ];
 
   return result.join('');
-}
+};
 
-function getFilename(resourcePath) {
+module.exports.getFilename = function(resourcePath) {
   var filename = path.basename(resourcePath);
 
   return path.basename(resourcePath, path.extname(filename));
-}
+};
 
-module.exports = { getRequireLoader, getSystemLoader, getFilename };
+module.exports.normalizeFilePath = function(filePath) {
+  if (os.platform() === 'win32') {
+    return newPath.replace(/\//g, '\\\\');
+  }
+
+  return filePath;
+}
