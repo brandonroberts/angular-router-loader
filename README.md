@@ -1,6 +1,6 @@
 # angular2-router-loader
 
-A Webpack loader for Angular 2 that enables string-based lazy loading with the `Angular Router`
+A Webpack loader for Angular 2 that enables string-based module loading with the `Angular Router`
 
 ## Installation
 
@@ -22,6 +22,8 @@ loaders: [
 ]
 ```
 
+## Lazy Loading
+
 In your route configuration, use `loadChildren` with a relative path to your lazy loaded angular module. The string is delimited with a `#` where the right side of split is the angular module class name.
 
 ```ts
@@ -32,13 +34,25 @@ export const routes: Routes = [
 ];
 ```
 
+## Synchronous Loading
+
+For synchronous module loading, add the `sync=true` as a query string value to your `loadChildren` string. The module will be included in your bundle and not lazy-loaded.
+
+```ts
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  { path: 'lazy', loadChildren './lazy.module#LazyModule?sync=true' }
+];
+```
+
 ## Loader Options
 
 Options are provided as a query string with the `angular2-router-loader`
 
-```js
+```ts
 loaders: [
-  'angular2-router-loader?delimiter=#'
+  'angular2-router-loader?option=value'
 ]
 
 ```
@@ -52,7 +66,7 @@ Changes to default delimiter for the module path/module name string
 Sets the loader string returned for code splitting.
 
 original
-```js
+```ts
 {
   path: 'lazy',
   loadChildren './lazy.module#LazyModule'
@@ -60,7 +74,7 @@ original
 ```
 
 replacement
-```js
+```ts
 {
   path: 'lazy',
   loadChildren: () => new Promise(function (resolve) {
@@ -76,7 +90,7 @@ If you prefer to use `System.import`, set the `loader` to `system`
 **NOTE:** Using `system` only works with Webpack 2. Webpack 1 users should use the default.
 
 replacement
-```js
+```ts
 {
   path: 'lazy',
   loadChildren: () => System.import('./lazy/lazy.module').then(function(module) {
@@ -108,14 +122,14 @@ If you set the `genDir` in the `angularCompilerOptions` to compile to a separate
 
 ## AoT example
 
-```js
+```ts
 loaders: [
   'angular2-router-loader?aot=true'
 ]
 ```
 
 original
-```js
+```ts
 {
   path: 'lazy',
   loadChildren './lazy.module#LazyModule'
@@ -123,7 +137,7 @@ original
 ```
 
 replacement
-```js
+```ts
 {
   path: 'lazy',
   loadChildren: () => new Promise(function (resolve) {

@@ -24,12 +24,23 @@ module.exports = function(source, sourcemap) {
   var filename = utils.getFilename(resourcePath);
 
   var replacedSource = source.replace(loadChildrenRegex, function(match, loadString) {
+    // check for query string in loadString
+    var queryIndex = loadString.lastIndexOf('?');
+    var hasQuery = queryIndex !== -1;
+    var loadStringQuery = hasQuery ? loaderUtils.parseQuery(loadString.substr(queryIndex)) : {};
+    var sync = !!loadStringQuery.sync;
+
+    // get the module path string
+    var pathString = hasQuery ? loadString.substr(0, (queryIndex - 1)) : loadString;
+
     // split the string on the delimiter
-    var parts = loadString.split(delimiter);
+    var parts = pathString.split(delimiter);
 
     // get the file path and module name
     var filePath = parts[0] + (aot ? moduleSuffix : '');
-    var moduleName = (parts[1] || 'default') + (aot ? factorySuffix : '');
+    var moduleName = (parts[1] || 'default');
+
+    moduleName += (aot ? factorySuffix : '');
 
     // update the file path for non-ngfactory files
     if (aot && filename.substr(-9) !== moduleSuffix.substr(-9)) {
@@ -42,7 +53,9 @@ module.exports = function(source, sourcemap) {
 
     filePath = utils.normalizeFilePath(filePath);
 
-    if (loader === 'system') {
+    if (sync) {
+      return utils.getSyncLoader(filePath, moduleName);
+    } else if (loader === 'system') {
       return utils.getSystemLoader(filePath, moduleName);
     } else {
       return utils.getRequireLoader(filePath, moduleName);

@@ -1,11 +1,29 @@
 var os = require('os');
 var path = require('path');
 
+module.exports.getRequireString = function(filePath, moduleName) {
+  return 'require(\'' + filePath + '\')[\'' + moduleName + '\']';
+};
+
+module.exports.getSyncLoader = function(filePath, moduleName) {
+  var requireString = module.exports.getRequireString(filePath, moduleName);
+
+  var result = [
+    'loadChildren: function() {\n',
+    '  return ' + requireString + ';\n',
+    '}'
+  ];
+
+  return result.join('');
+};
+
 module.exports.getRequireLoader = function(filePath, moduleName) {
+  var requireString = module.exports.getRequireString(filePath, moduleName);
+
   var result = [
     'loadChildren: () => new Promise(function (resolve) {\n',
     '  (require as any).ensure([], function (require) {\n',
-    '    resolve(require(\'' + filePath + '\')[\'' + moduleName + '\']);\n',
+    '    resolve(' + requireString + ');\n',
     '  });\n',
     '})'
   ];
