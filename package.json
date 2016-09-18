@@ -4,7 +4,8 @@
   "description": "A webpack loader for Angular that enables string-based module loading with the Angular Router",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec spec",
+    "test:watch": "npm run test -- -w"
   },
   "keywords": [
     "angular2",
@@ -24,5 +25,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brandonroberts/angular2-router-loader.git"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "pmock": "^0.2.3",
+    "should": "^11.1.0"
   }
 }
