@@ -1,5 +1,8 @@
 # angular2-router-loader
 
+[![CircleCI](https://circleci.com/gh/brandonroberts/angular2-router-loader.svg?style=shield&circle-token=a8a709588d22664ab74922050eda672898d2d417)](https://circleci.com/gh/brandonroberts/angular2-router-loader)
+[![npm version](https://badge.fury.io/js/angular2-router-loader.svg)](https://badge.fury.io/js/angular2-router-loader)
+
 A Webpack loader for Angular 2 that enables string-based module loading with the `Angular Router`
 
 ## Installation
