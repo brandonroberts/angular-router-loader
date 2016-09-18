@@ -31,7 +31,7 @@ module.exports = function(source, sourcemap) {
     var sync = !!loadStringQuery.sync;
 
     // get the module path string
-    var pathString = hasQuery ? loadString.substr(0, (queryIndex - 1)) : loadString;
+    var pathString = hasQuery ? loadString.substr(0, queryIndex) : loadString;
 
     // split the string on the delimiter
     var parts = pathString.split(delimiter);
