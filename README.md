@@ -81,7 +81,7 @@ replacement
 {
   path: 'lazy',
   loadChildren: () => new Promise(function (resolve) {
-    (require as any).ensure([], function (require) {
+    (require as any).ensure([], function (require: any) {
       resolve(require('./lazy/lazy.module')['LazyModule']);
     });
   })
@@ -144,7 +144,7 @@ replacement
 {
   path: 'lazy',
   loadChildren: () => new Promise(function (resolve) {
-    (require as any).ensure([], function (require) {
+    (require as any).ensure([], function (require: any) {
       resolve(require('./lazy/lazy.module.ngfactory')['LazyModuleNgFactory']);
     });
   })
