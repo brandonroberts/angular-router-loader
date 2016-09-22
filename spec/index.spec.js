@@ -13,7 +13,7 @@ describe('Loader', function() {
   it('should return a loadChildren async require statement', function() {
     var result = [
       'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require) {\n',
+      '  (require as any).ensure([], function (require: any) {\n',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);\n',
       '  });\n',
       '})'
@@ -63,7 +63,7 @@ describe('Loader', function() {
 
     var result = [
       'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require) {\n',
+      '  (require as any).ensure([], function (require: any) {\n',
       '    resolve(require(\'./path/to/file.module\')[\'default\']);\n',
       '  });\n',
       '})'
@@ -80,7 +80,7 @@ describe('Loader', function() {
   it('should support a custom delimiter', function() {
     var result = [
       'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require) {\n',
+      '  (require as any).ensure([], function (require: any) {\n',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);\n',
       '  });\n',
       '})'
@@ -100,7 +100,7 @@ describe('Loader', function() {
 
     var result = [
       'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require) {\n',
+      '  (require as any).ensure([], function (require: any) {\n',
       '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);\n',
       '  });\n',
       '})'
@@ -124,7 +124,7 @@ describe('Loader', function() {
     it('should return a loadChildren async require statement', function() {
       var result = [
         'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require) {\n',
+        '  (require as any).ensure([], function (require: any) {\n',
         '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);\n',
         '  });\n',
         '})'
@@ -174,7 +174,7 @@ describe('Loader', function() {
 
       var result = [
         'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require) {\n',
+        '  (require as any).ensure([], function (require: any) {\n',
         '    resolve(require(\'../../path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);\n',
         '  });\n',
         '})'
@@ -193,7 +193,7 @@ describe('Loader', function() {
 
       var result = [
         'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require) {\n',
+        '  (require as any).ensure([], function (require: any) {\n',
         '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);\n',
         '  });\n',
         '})'

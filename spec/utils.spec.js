@@ -33,7 +33,7 @@ describe('Utils', function() {
     it('should return an asynchronous require loadChildren statement', function() {
       var result = [
         'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require) {\n',
+        '  (require as any).ensure([], function (require: any) {\n',
         '    resolve(' + getRequireString(path, name) + ');\n',
         '  });\n',
         '})'
