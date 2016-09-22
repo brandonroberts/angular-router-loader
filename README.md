@@ -19,7 +19,7 @@ loaders: [
     test: /\.ts$/,
     loaders: [
       'awesome-typescript-loader',
-      'angular2-router-loader
+      'angular2-router-loader'
     ]
   }
 ]
