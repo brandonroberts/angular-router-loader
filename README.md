@@ -60,6 +60,10 @@ loaders: [
 
 ```
 
+### debug: `(default: false)`
+
+Logs the file, loadChildren string found and replacement string used to the console.
+
 ### delimiter: `(default: '#')`
 
 Changes to default delimiter for the module path/module name string

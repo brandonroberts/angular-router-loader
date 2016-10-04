@@ -1,45 +1,45 @@
 var os = require('os');
 var path = require('path');
 
-module.exports.getRequireString = function(filePath, moduleName) {
+module.exports.getRequireString = function(filePath, moduleName, inline) {
   return 'require(\'' + filePath + '\')[\'' + moduleName + '\']';
 };
 
-module.exports.getSyncLoader = function(filePath, moduleName) {
+module.exports.getSyncLoader = function(filePath, moduleName, inline) {
   var requireString = module.exports.getRequireString(filePath, moduleName);
 
   var result = [
-    'loadChildren: function() {\n',
-    '  return ' + requireString + ';\n',
+    'loadChildren: function() {',
+    '  return ' + requireString + ';',
     '}'
   ];
 
-  return result.join('');
+  return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getRequireLoader = function(filePath, moduleName) {
+module.exports.getRequireLoader = function(filePath, moduleName, inline) {
   var requireString = module.exports.getRequireString(filePath, moduleName);
 
   var result = [
-    'loadChildren: () => new Promise(function (resolve) {\n',
-    '  (require as any).ensure([], function (require: any) {\n',
-    '    resolve(' + requireString + ');\n',
-    '  });\n',
+    'loadChildren: () => new Promise(function (resolve) {',
+    '  (require as any).ensure([], function (require: any) {',
+    '    resolve(' + requireString + ');',
+    '  });',
     '})'
   ];
 
-  return result.join('');
+  return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getSystemLoader = function(filePath, moduleName) {
+module.exports.getSystemLoader = function(filePath, moduleName, inline) {
   var result = [
-    'loadChildren: () => System.import(\'' + filePath + '\')\n',
-    '  .then(function(module) {\n',
-    '    return module[\'' + moduleName + '\'];\n',
+    'loadChildren: () => System.import(\'' + filePath + '\')',
+    '  .then(function(module) {',
+    '    return module[\'' + moduleName + '\'];',
     '  })'
   ];
 
-  return result.join('');
+  return inline ? result.join('') : result.join('\n');
 };
 
 module.exports.getFilename = function(resourcePath) {

@@ -6,7 +6,7 @@ module.exports = function(source, sourcemap) {
   this.cacheable && this.cacheable();
 
   // regex for loadChildren string
-  var loadChildrenRegex = /loadChildren:* ['|"](.*?)['|"]/gm;
+  var loadChildrenRegex = /loadChildren: ['|"](.*?)['|"]/gm;
 
   // parse query params
   var query = loaderUtils.parseQuery(this.query);
@@ -18,6 +18,8 @@ module.exports = function(source, sourcemap) {
   var factorySuffix = query.factorySuffix || 'NgFactory';
   var loader = query.loader || 'require';
   var genDir = query.genDir || '';
+  var inline = query.inline || true;
+  var debug = query.debug || false;
 
   // get the filename path
   var resourcePath = this.resourcePath;
@@ -53,13 +55,24 @@ module.exports = function(source, sourcemap) {
 
     filePath = utils.normalizeFilePath(filePath);
 
+    var replacement = match;
+
     if (sync) {
-      return utils.getSyncLoader(filePath, moduleName);
+      replacement = utils.getSyncLoader(filePath, moduleName, inline);
     } else if (loader === 'system') {
-      return utils.getSystemLoader(filePath, moduleName);
+      replacement = utils.getSystemLoader(filePath, moduleName, inline);
     } else {
-      return utils.getRequireLoader(filePath, moduleName);
+      replacement = utils.getRequireLoader(filePath, moduleName, inline);
     }
+
+    if (debug) {
+      console.log('[angular2-router-loader]: --DEBUG--');
+      console.log('[angular2-router-loader]: File: ' + resourcePath);
+      console.log('[angular2-router-loader]: Original: ' + match);
+      console.log('[angular2-router-loader]: Replacement: ' + replacement);
+    }
+
+    return replacement;
   });
 
   if (this.callback) {

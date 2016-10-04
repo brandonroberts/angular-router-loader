@@ -18,12 +18,12 @@ describe('Utils', function() {
 
     it('should return a synchronous require loadChildren statement', function() {
       var result = [
-        'loadChildren: function() {\n',
-        '  return ' + getRequireString(path, name) + ';\n',
+        'loadChildren: function() {',
+        '  return ' + getRequireString(path, name) + ';',
         '}'
       ];
 
-      getSyncLoader('path', 'name').should.eql(result.join(''));
+      getSyncLoader('path', 'name', true).should.eql(result.join(''));
     });
   });
 
@@ -32,14 +32,14 @@ describe('Utils', function() {
 
     it('should return an asynchronous require loadChildren statement', function() {
       var result = [
-        'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require: any) {\n',
-        '    resolve(' + getRequireString(path, name) + ');\n',
-        '  });\n',
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  (require as any).ensure([], function (require: any) {',
+        '    resolve(' + getRequireString(path, name) + ');',
+        '  });',
         '})'
       ];
 
-      getRequireLoader('path', 'name').should.eql(result.join(''));
+      getRequireLoader('path', 'name', true).should.eql(result.join(''));
     });
   });
 
@@ -48,13 +48,13 @@ describe('Utils', function() {
 
     it('should return an asynchronous System.import loadChildren statement', function() {
       var result = [
-        'loadChildren: () => System.import(\'' + path + '\')\n',
-        '  .then(function(module) {\n',
-        '    return module[\'' + name + '\'];\n',
+        'loadChildren: () => System.import(\'' + path + '\')',
+        '  .then(function(module) {',
+        '    return module[\'' + name + '\'];',
         '  })'
       ];
 
-      getSystemLoader('path', 'name').should.eql(result.join(''));
+      getSystemLoader('path', 'name', true).should.eql(result.join(''));
     });
   });
 

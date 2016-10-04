@@ -12,10 +12,10 @@ describe('Loader', function() {
 
   it('should return a loadChildren async require statement', function() {
     var result = [
-      'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require: any) {\n',
-      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);\n',
-      '  });\n',
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+      '  });',
       '})'
     ];
 
@@ -29,8 +29,8 @@ describe('Loader', function() {
 
   it('should return a loadChildren sync require statement', function() {
     var result = [
-      'loadChildren: function() {\n',
-      '  return require(\'./path/to/file.module\')[\'FileModule\'];\n',
+      'loadChildren: function() {',
+      '  return require(\'./path/to/file.module\')[\'FileModule\'];',
       '}'
     ];
 
@@ -44,9 +44,9 @@ describe('Loader', function() {
 
   it ('should return a loadChildren System.import statement', function() {
     var result = [
-      'loadChildren: () => System.import(\'./path/to/file.module\')\n',
-      '  .then(function(module) {\n',
-      '    return module[\'FileModule\'];\n',
+      'loadChildren: () => System.import(\'./path/to/file.module\')',
+      '  .then(function(module) {',
+      '    return module[\'FileModule\'];',
       '  })'
     ];
 
@@ -62,10 +62,10 @@ describe('Loader', function() {
     var modulePath = './path/to/file.module';
 
     var result = [
-      'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require: any) {\n',
-      '    resolve(require(\'./path/to/file.module\')[\'default\']);\n',
-      '  });\n',
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'./path/to/file.module\')[\'default\']);',
+      '  });',
       '})'
     ];
 
@@ -79,10 +79,10 @@ describe('Loader', function() {
 
   it('should support a custom delimiter', function() {
     var result = [
-      'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require: any) {\n',
-      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);\n',
-      '  });\n',
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+      '  });',
       '})'
     ];
 
@@ -99,10 +99,10 @@ describe('Loader', function() {
     var env = pmock.platform('win32');
 
     var result = [
-      'loadChildren: () => new Promise(function (resolve) {\n',
-      '  (require as any).ensure([], function (require: any) {\n',
-      '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);\n',
-      '  });\n',
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);',
+      '  });',
       '})'
     ];
 
@@ -123,10 +123,10 @@ describe('Loader', function() {
 
     it('should return a loadChildren async require statement', function() {
       var result = [
-        'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require: any) {\n',
-        '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);\n',
-        '  });\n',
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  (require as any).ensure([], function (require: any) {',
+        '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
+        '  });',
         '})'
       ];
 
@@ -140,8 +140,8 @@ describe('Loader', function() {
 
     it('should return a loadChildren sync require statement', function() {
       var result = [
-        'loadChildren: function() {\n',
-        '  return require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\'];\n',
+        'loadChildren: function() {',
+        '  return require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\'];',
         '}'
       ];
 
@@ -155,9 +155,9 @@ describe('Loader', function() {
 
     it ('should return a loadChildren System.import statement', function() {
       var result = [
-        'loadChildren: () => System.import(\'../../path/to/file.module.ngfactory\')\n',
-        '  .then(function(module) {\n',
-        '    return module[\'FileModuleNgFactory\'];\n',
+        'loadChildren: () => System.import(\'../../path/to/file.module.ngfactory\')',
+        '  .then(function(module) {',
+        '    return module[\'FileModuleNgFactory\'];',
         '  })'
       ];
 
@@ -173,10 +173,10 @@ describe('Loader', function() {
       var moduleSuffix = '.ngfile';
 
       var result = [
-        'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require: any) {\n',
-        '    resolve(require(\'../../path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);\n',
-        '  });\n',
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  (require as any).ensure([], function (require: any) {',
+        '    resolve(require(\'../../path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);',
+        '  });',
         '})'
       ];
 
@@ -192,10 +192,10 @@ describe('Loader', function() {
       var factorySuffix = 'NgFact';
 
       var result = [
-        'loadChildren: () => new Promise(function (resolve) {\n',
-        '  (require as any).ensure([], function (require: any) {\n',
-        '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);\n',
-        '  });\n',
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  (require as any).ensure([], function (require: any) {',
+        '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);',
+        '  });',
         '})'
       ];
 
