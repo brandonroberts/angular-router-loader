@@ -72,6 +72,10 @@ describe('Utils', function() {
           normalizeFilePath('./path').should.eql('.\\\\path');
       });
 
+      it('should make a relative path if the path is not relative', function() {
+          normalizeFilePath('path').should.eql('.\\\\path');
+      });
+
       afterEach(function() {
         env.reset();
       });
@@ -84,6 +88,10 @@ describe('Utils', function() {
 
       it('should not replace backslashes', function() {
           normalizeFilePath('./path').should.eql('./path');
+      });
+
+      it('should make a relative path if the path is not relative', function() {
+          normalizeFilePath('path').should.eql('./path');
       });
 
       afterEach(function() {

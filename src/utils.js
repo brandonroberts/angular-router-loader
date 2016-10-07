@@ -49,11 +49,16 @@ module.exports.getFilename = function(resourcePath) {
 };
 
 module.exports.normalizeFilePath = function(filePath) {
-  if (os.platform() === 'win32') {
-    var path = filePath.replace(/\//g, '\\');
+  var newPath = filePath;
 
-    return path.replace(/\\/g, '\\\\');
+  if (!newPath.startsWith('./') && !newPath.startsWith('../')) {
+    newPath = './' + newPath;
   }
 
-  return filePath;
+  if (os.platform() === 'win32') {
+    var path = newPath.replace(/\//g, '\\');
+    newPath = path.replace(/\\/g, '\\\\');
+  }
+
+  return newPath;
 }
