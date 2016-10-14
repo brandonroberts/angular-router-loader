@@ -10,6 +10,68 @@ describe('Loader', function() {
   var modulePath = './path/to/file.module#FileModule';
   var query = '';
 
+  describe('should match', function() {
+    var loadStrings = [
+      `loadChildren: '${modulePath}'`,
+      `loadChildren:'${modulePath}'`,
+      `loadChildren :'${modulePath}'`,
+      `loadChildren : '${modulePath}'`,
+      `loadChildren :  '${modulePath}'`,
+      `loadChildren  :'${modulePath}'`,
+
+      `loadChildren: "${modulePath}"`,
+      `loadChildren:"${modulePath}"`,
+      `loadChildren :"${modulePath}"`,
+      `loadChildren : "${modulePath}"`
+    ];
+
+    loadStrings.forEach(function(loadString) {
+      it(loadString, function() {
+        var result = [
+          'loadChildren: () => new Promise(function (resolve) {',
+          '  (require as any).ensure([], function (require: any) {',
+          '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+          '  });',
+          '})'
+        ];
+
+        var loadedString = loader.call({
+          resourcePath: resourcePath,
+          query: query
+        }, loadString);
+
+        checkResult(loadedString, result);
+      });
+    });
+
+    describe('should not match', function() {
+      var loadStrings = [
+        `loadChildren: \`${modulePath}\``,
+        `loadChildren : () => {}`,
+        `loadChildren: someFunction('./')`
+      ];
+
+      loadStrings.forEach(function(loadString) {
+        it(loadString, function() {
+          var result = [
+            'loadChildren: () => new Promise(function (resolve) {',
+            '  (require as any).ensure([], function (require: any) {',
+            '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+            '  });',
+            '})'
+          ];
+
+          var loadedString = loader.call({
+            resourcePath: resourcePath,
+            query: query
+          }, loadString);
+
+          checkResult(loadedString, [loadString]);
+        });
+      });
+    });
+  });
+
   it('should return a loadChildren async require statement', function() {
     var result = [
       'loadChildren: () => new Promise(function (resolve) {',
