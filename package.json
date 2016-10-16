@@ -4,6 +4,7 @@
   "description": "A webpack loader for Angular that enables string-based module loading with the Angular Router",
   "main": "src/index.js",
   "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "test": "mocha -R spec spec",
     "test:watch": "npm run test -- -w"
   },
@@ -27,6 +28,7 @@
     "url": "git+https://github.com/brandonroberts/angular2-router-loader.git"
   },
   "devDependencies": {
+    "conventional-changelog-cli": "^1.2.0",
     "mocha": "^3.0.2",
     "pmock": "^0.2.3",
     "should": "^11.1.0"
