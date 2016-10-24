@@ -63,48 +63,90 @@ describe('Utils', function() {
     var normalizeFilePath = utils.normalizeFilePath;
     var env;
 
-    describe('for windows os', function() {
-      beforeEach(function() {
-        env = pmock.platform('win32');
-      });
+    describe("resolution=local", function () {
+      describe('for windows os', function() {
+        beforeEach(function() {
+          env = pmock.platform('win32');
+        });
 
-      it('should replace backslashes with forward slashes', function() {
+        it('should replace backslashes with forward slashes', function() {
           normalizeFilePath('./path').should.eql('.\\\\path');
-      });
+        });
 
-      it('should make a relative path if the path is not relative', function() {
+        it('should make a relative path if the path is not relative', function() {
           normalizeFilePath('path').should.eql('.\\\\path');
+        });
+
+        afterEach(function() {
+          env.reset();
+        });
       });
 
-      afterEach(function() {
-        env.reset();
-      });
-    });
+      describe('for non-windows os', function() {
+        beforeEach(function() {
+          env = pmock.platform('posix');
+        });
 
-    describe('for non-windows os', function() {
-      beforeEach(function() {
-        env = pmock.platform('posix');
-      });
-
-      it('should not replace backslashes', function() {
+        it('should not replace backslashes', function() {
           normalizeFilePath('./path').should.eql('./path');
+        });
+
+        it('should make a relative path if the path is not relative', function() {
+          normalizeFilePath('path').should.eql('./path');
+        });
+
+        afterEach(function() {
+          env.reset();
+        });
+      });
+    });
+
+    describe("resolution=module", function () {
+      describe('for windows os', function() {
+        beforeEach(function() {
+          env = pmock.platform('win32');
+        });
+
+        it('should replace backslashes with forward slashes', function() {
+          normalizeFilePath('./path', 'module').should.eql('.\\\\path');
+        });
+
+        it('should do nothing if no relative path detected', function() {
+          normalizeFilePath('path', 'module').should.eql('path');
+        });
+
+        afterEach(function() {
+          env.reset();
+        });
       });
 
-      it('should make a relative path if the path is not relative', function() {
-          normalizeFilePath('path').should.eql('./path');
+      describe('for non-windows os', function() {
+        beforeEach(function() {
+          env = pmock.platform('posix');
+        });
+
+        it('should not replace backslashes', function() {
+          normalizeFilePath('./path', 'module').should.eql('./path');
+        });
+
+        it('should do nothing if no relative path detected', function() {
+          normalizeFilePath('path', 'module').should.eql('path');
+        });
+
+        afterEach(function() {
+          env.reset();
+        });
       });
 
       afterEach(function() {
         env.reset();
       });
-    });
+    })
   });
 
   describe('getFilename', function() {
-    var getFilename = utils.getFilename;
-
     it('should return the filename for a given path without an extension', function() {
-      getFilename('path/to/module.ngfactory.ts').should.eql('module.ngfactory');
+      utils.getFilename('path/to/module.ngfactory.ts').should.eql('module.ngfactory');
     });
   });
 });

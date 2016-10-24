@@ -49,6 +49,20 @@ export const routes: Routes = [
 ];
 ```
 
+## Module Loading
+
+For external npm module loading (multi-package apps), add the `resolution=module` query suffix to the `loadChildren` expression. This will try to import given module and extract referenced Angular Module.
+
+```ts
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  { path: 'lazy', loadChildren 'some-module#LazyModule?resolution=module' }
+];
+```
+
+In AOT mode, Module resolution will try to extract `LazyModuleNgFactory` from `some-module` in the example. So don't forget to export it in your external module.
+
 ## Additional Documentation
 
 * [Loader Options](./docs/options.md#general-loader-options)
