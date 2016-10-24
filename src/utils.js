@@ -1,6 +1,13 @@
 var os = require('os');
 var path = require('path');
 
+var RESOLUTION_MODES = {
+  LOCAL: 'local',
+  MODULE: 'module'
+};
+
+module.exports.RESOLUTION_MODES = RESOLUTION_MODES;
+
 module.exports.getRequireString = function(filePath, moduleName, inline) {
   return 'require(\'' + filePath + '\')[\'' + moduleName + '\']';
 };
@@ -48,10 +55,11 @@ module.exports.getFilename = function(resourcePath) {
   return path.basename(resourcePath, path.extname(filename));
 };
 
-module.exports.normalizeFilePath = function(filePath) {
+module.exports.normalizeFilePath = function(filePath, resolutionMode) {
   var newPath = filePath;
+  resolutionMode = resolutionMode || RESOLUTION_MODES.LOCAL;
 
-  if (!newPath.startsWith('./') && !newPath.startsWith('../')) {
+  if (resolutionMode === RESOLUTION_MODES.LOCAL && !newPath.startsWith('./') && !newPath.startsWith('../')) {
     newPath = './' + newPath;
   }
 
@@ -61,4 +69,4 @@ module.exports.normalizeFilePath = function(filePath) {
   }
 
   return newPath;
-}
+};
