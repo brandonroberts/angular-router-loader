@@ -6,11 +6,13 @@ function checkResult(loaded, result) {
 }
 
 describe('Loader', function() {
+
   var resourcePath = 'path/to/routes.ts';
   var modulePath = './path/to/file.module#FileModule';
   var query = '';
 
   describe('should match', function() {
+
     var loadStrings = [
       `loadChildren: '${modulePath}'`,
       `loadChildren:'${modulePath}'`,
@@ -27,11 +29,12 @@ describe('Loader', function() {
 
     loadStrings.forEach(function(loadString) {
       it(loadString, function() {
+
         var result = [
           'loadChildren: () => new Promise(function (resolve) {',
           '  (require as any).ensure([], function (require: any) {',
           '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-          '  });',
+          '  }, \'file\');',
           '})'
         ];
 
@@ -41,10 +44,12 @@ describe('Loader', function() {
         }, loadString);
 
         checkResult(loadedString, result);
+
       });
     });
 
     describe('should not match', function() {
+
       var loadStrings = [
         `loadChildren: \`${modulePath}\``,
         `loadChildren : () => {}`,
@@ -57,7 +62,7 @@ describe('Loader', function() {
             'loadChildren: () => new Promise(function (resolve) {',
             '  (require as any).ensure([], function (require: any) {',
             '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-            '  });',
+            '  }, \'file\');',
             '})'
           ];
 
@@ -67,9 +72,11 @@ describe('Loader', function() {
           }, loadString);
 
           checkResult(loadedString, [loadString]);
+
         });
       });
     });
+
   });
 
   it('should return a loadChildren async require statement', function() {
@@ -77,7 +84,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  });',
+      '  }, \'file\');',
       '})'
     ];
 
@@ -127,7 +134,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'default\']);',
-      '  });',
+      '  }, \'file\');',
       '})'
     ];
 
@@ -144,7 +151,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  });',
+      '  }, \'file\');',
       '})'
     ];
 
@@ -164,7 +171,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);',
-      '  });',
+      '  }, \'.\\\\path\\\\to\\\\file\');',
       '})'
     ];
 
@@ -188,7 +195,7 @@ describe('Loader', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
-        '  });',
+        '  }, \'file\');',
         '})'
       ];
 
@@ -238,7 +245,7 @@ describe('Loader', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);',
-        '  });',
+        '  }, \'file\');',
         '})'
       ];
 
@@ -257,7 +264,7 @@ describe('Loader', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);',
-        '  });',
+        '  }, \'file\');',
         '})'
       ];
 
@@ -268,5 +275,7 @@ describe('Loader', function() {
 
       checkResult(loadedString, result);
     });
+
   });
+
 });

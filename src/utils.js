@@ -24,7 +24,7 @@ module.exports.getRequireLoader = function(filePath, moduleName, inline) {
     'loadChildren: () => new Promise(function (resolve) {',
     '  (require as any).ensure([], function (require: any) {',
     '    resolve(' + requireString + ');',
-    '  });',
+    '  }, \'' + module.exports.getFileNameFromFilePath(filePath) + '\');',
     '})'
   ];
 
@@ -40,6 +40,12 @@ module.exports.getSystemLoader = function(filePath, moduleName, inline) {
   ];
 
   return inline ? result.join('') : result.join('\n');
+};
+
+module.exports.getFileNameFromFilePath = function(filePath) {
+  var startIndex = filePath.lastIndexOf('/');
+  var endIndex = filePath.indexOf('.module');
+  return filePath.substring((startIndex+1), endIndex);
 };
 
 module.exports.getFilename = function(resourcePath) {
