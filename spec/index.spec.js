@@ -178,6 +178,23 @@ describe('Loader', function() {
     env.reset();
   });
 
+  it('should support non-relative paths', function() {
+    var result = [
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'path/to/file.module\')[\'FileModule\']);',
+      '  });',
+      '})'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath,
+      query: ''
+    }, `loadChildren: '${modulePath.replace('./', '')}'`);
+
+    checkResult(loadedString, result);
+  });
+
   describe('AoT', function() {
     beforeEach(function() {
       query = '?aot=true&genDir=.'
@@ -265,6 +282,23 @@ describe('Loader', function() {
         resourcePath: resourcePath,
         query: query + '&factorySuffix=' + factorySuffix
       }, `loadChildren: '${modulePath}'`);
+
+      checkResult(loadedString, result);
+    });
+
+    it('should support non-relative paths', function() {
+      var result = [
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  (require as any).ensure([], function (require: any) {',
+        '    resolve(require(\'path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
+        '  });',
+        '})'
+      ];
+
+      var loadedString = loader.call({
+        resourcePath: resourcePath,
+        query: query
+      }, `loadChildren: '${modulePath.replace('./', '')}'`);
 
       checkResult(loadedString, result);
     });

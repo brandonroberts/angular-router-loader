@@ -31,6 +31,7 @@ module.exports = function(source, sourcemap) {
     var hasQuery = queryIndex !== -1;
     var loadStringQuery = hasQuery ? loaderUtils.parseQuery(loadString.substr(queryIndex)) : {};
     var sync = !!loadStringQuery.sync;
+    var isRelativePath = loadString.startsWith('.');
 
     // get the module path string
     var pathString = hasQuery ? loadString.substr(0, queryIndex) : loadString;
@@ -45,7 +46,7 @@ module.exports = function(source, sourcemap) {
     moduleName += (aot ? factorySuffix : '');
 
     // update the file path for non-ngfactory files
-    if (aot && filename.substr(-9) !== moduleSuffix.substr(-9)) {
+    if (aot && filename.substr(-9) !== moduleSuffix.substr(-9) && isRelativePath) {
       // find the relative dir to file from the genDir
       var relativeDir = path.relative(path.dirname(resourcePath), path.resolve(genDir));
 
@@ -53,7 +54,7 @@ module.exports = function(source, sourcemap) {
       filePath = path.join(relativeDir, filePath);
     }
 
-    filePath = utils.normalizeFilePath(filePath);
+    filePath = utils.normalizeFilePath(filePath, isRelativePath);
 
     var replacement = match;
 
