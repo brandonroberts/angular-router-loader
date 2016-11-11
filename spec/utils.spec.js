@@ -69,11 +69,15 @@ describe('Utils', function() {
       });
 
       it('should replace backslashes with forward slashes', function() {
-          normalizeFilePath('./path').should.eql('.\\\\path');
+          normalizeFilePath('./path', true).should.eql('.\\\\path');
       });
 
-      it('should make a relative path if the path is not relative', function() {
-          normalizeFilePath('path').should.eql('.\\\\path');
+      it('should make a relative path if the path is not relative and the original path was relative', function() {
+          normalizeFilePath('path', true).should.eql('.\\\\path');
+      });
+
+      it('should not make a relative path if the original path was not relative', function() {
+          normalizeFilePath('path', false).should.eql('path');
       });
 
       afterEach(function() {
@@ -87,11 +91,15 @@ describe('Utils', function() {
       });
 
       it('should not replace backslashes', function() {
-          normalizeFilePath('./path').should.eql('./path');
+          normalizeFilePath('./path', true).should.eql('./path');
       });
 
-      it('should make a relative path if the path is not relative', function() {
-          normalizeFilePath('path').should.eql('./path');
+      it('should make a relative path if the path is not relative and the original path was relative', function() {
+          normalizeFilePath('path', true).should.eql('./path');
+      });
+
+      it('should not make a relative path if the original path was not relative', function() {
+          normalizeFilePath('path', false).should.eql('path');
       });
 
       afterEach(function() {
