@@ -6,11 +6,13 @@ function checkResult(loaded, result) {
 }
 
 describe('Loader', function() {
+
   var resourcePath = 'path/to/routes.ts';
   var modulePath = './path/to/file.module#FileModule';
   var query = '';
 
   describe('should match', function() {
+
     var loadStrings = [
       `loadChildren: '${modulePath}'`,
       `loadChildren:'${modulePath}'`,
@@ -27,6 +29,7 @@ describe('Loader', function() {
 
     loadStrings.forEach(function(loadString) {
       it(loadString, function() {
+
         var result = [
           'loadChildren: () => new Promise(function (resolve) {',
           '  (require as any).ensure([], function (require: any) {',
@@ -41,10 +44,12 @@ describe('Loader', function() {
         }, loadString);
 
         checkResult(loadedString, result);
+
       });
     });
 
     describe('should not match', function() {
+
       var loadStrings = [
         `loadChildren: \`${modulePath}\``,
         `loadChildren : () => {}`,
@@ -67,9 +72,11 @@ describe('Loader', function() {
           }, loadString);
 
           checkResult(loadedString, [loadString]);
+
         });
       });
     });
+
   });
 
   it('should return a loadChildren async require statement', function() {
@@ -100,6 +107,23 @@ describe('Loader', function() {
       resourcePath: resourcePath,
       query: query
     }, `loadChildren: '${modulePath}?sync=true'`);
+
+    checkResult(loadedString, result);
+  });
+
+  it('should return a loadChildren chunkName require statement', function() {
+    var result = [
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+      '  }, \'name\');',
+      '})'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath,
+      query: query
+    }, `loadChildren: '${modulePath}?chunkName=name'`);
 
     checkResult(loadedString, result);
   });
@@ -303,4 +327,5 @@ describe('Loader', function() {
       checkResult(loadedString, result);
     });
   });
+
 });

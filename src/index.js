@@ -31,6 +31,7 @@ module.exports = function(source, sourcemap) {
     var hasQuery = queryIndex !== -1;
     var loadStringQuery = hasQuery ? loaderUtils.parseQuery(loadString.substr(queryIndex)) : {};
     var sync = !!loadStringQuery.sync;
+    var chunkName = loadStringQuery.chunkName || undefined;
     var isRelativePath = loadString.startsWith('.');
 
     // get the module path string
@@ -63,7 +64,7 @@ module.exports = function(source, sourcemap) {
     } else if (loader === 'system') {
       replacement = utils.getSystemLoader(filePath, moduleName, inline);
     } else {
-      replacement = utils.getRequireLoader(filePath, moduleName, inline);
+      replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline);
     }
 
     if (debug) {
