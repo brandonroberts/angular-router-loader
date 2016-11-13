@@ -1,5 +1,17 @@
+<a name="0.3.4"></a>
+## [0.3.4](https://github.com/brandonroberts/angular2-router-loader/compare/v0.3.3...v0.3.4) (2016-11-13)
+
+
+### Features
+
+* **docs:** Added example of named chunks ([#29](https://github.com/brandonroberts/angular2-router-loader/issues/29)) ([4643068](https://github.com/brandonroberts/angular2-router-loader/commit/4643068))
+* **loader:** Added support for named chunks ([#27](https://github.com/brandonroberts/angular2-router-loader/issues/27)) ([43e83a3](https://github.com/brandonroberts/angular2-router-loader/commit/43e83a3))
+* **loader:** Added support for non-relative paths ([28befa8](https://github.com/brandonroberts/angular2-router-loader/commit/28befa8))
+
+
+
 <a name="0.3.3"></a>
-## [0.3.3](https://github.com/brandonroberts/angular2-router-loader/compare/v0.3.2...v0.3.3) (2016-10-16)
+## [0.3.3](https://github.com/brandonroberts/angular2-router-loader/compare/v0.3.2...v0.3.3) (2016-10-14)
 
 
 ### Bug Fixes
@@ -14,17 +26,12 @@
 
 
 <a name="0.3.1"></a>
-## [0.3.1](https://github.com/brandonroberts/angular2-router-loader/compare/v0.3.0...v0.3.1) (2016-10-07)
+## [0.3.1](https://github.com/brandonroberts/angular2-router-loader/compare/v0.2.2...v0.3.1) (2016-10-07)
 
 
 ### Bug Fixes
 
 * **loader:** Fixed files without a relative path. ([01fb92e](https://github.com/brandonroberts/angular2-router-loader/commit/01fb92e))
-
-
-
-<a name="0.3.0"></a>
-# [0.3.0](https://github.com/brandonroberts/angular2-router-loader/compare/v0.2.2...v0.3.0) (2016-10-04)
 
 
 ### Features
