@@ -49,10 +49,10 @@ module.exports.getFilename = function(resourcePath) {
   return path.basename(resourcePath, path.extname(filename));
 };
 
-module.exports.normalizeFilePath = function(filePath) {
+module.exports.normalizeFilePath = function(filePath, relativePathMatch) {
   var newPath = filePath;
 
-  if (!newPath.startsWith('./') && !newPath.startsWith('../')) {
+  if (relativePathMatch && !newPath.startsWith('./') && !newPath.startsWith('../')) {
     newPath = './' + newPath;
   }
 
