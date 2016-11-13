@@ -34,7 +34,7 @@ describe('Loader', function() {
           'loadChildren: () => new Promise(function (resolve) {',
           '  (require as any).ensure([], function (require: any) {',
           '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-          '  }, \'file\');',
+          '  });',
           '})'
         ];
 
@@ -62,7 +62,7 @@ describe('Loader', function() {
             'loadChildren: () => new Promise(function (resolve) {',
             '  (require as any).ensure([], function (require: any) {',
             '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-            '  }, \'file\');',
+            '  });',
             '})'
           ];
 
@@ -84,7 +84,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, \'file\');',
+      '  });',
       '})'
     ];
 
@@ -107,6 +107,23 @@ describe('Loader', function() {
       resourcePath: resourcePath,
       query: query
     }, `loadChildren: '${modulePath}?sync=true'`);
+
+    checkResult(loadedString, result);
+  });
+
+  it('should return a loadChildren chunkName require statement', function() {
+    var result = [
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+      '  }, \'name\');',
+      '})'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath,
+      query: query
+    }, `loadChildren: '${modulePath}?chunkName=name'`);
 
     checkResult(loadedString, result);
   });
@@ -134,7 +151,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'default\']);',
-      '  }, \'file\');',
+      '  });',
       '})'
     ];
 
@@ -151,7 +168,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, \'file\');',
+      '  });',
       '})'
     ];
 
@@ -171,7 +188,7 @@ describe('Loader', function() {
       'loadChildren: () => new Promise(function (resolve) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);',
-      '  }, \'.\\\\path\\\\to\\\\file\');',
+      '  });',
       '})'
     ];
 
@@ -195,7 +212,7 @@ describe('Loader', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
-        '  }, \'file\');',
+        '  });',
         '})'
       ];
 
@@ -245,7 +262,7 @@ describe('Loader', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);',
-        '  }, \'file\');',
+        '  });',
         '})'
       ];
 
@@ -264,7 +281,7 @@ describe('Loader', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);',
-        '  }, \'file\');',
+        '  });',
         '})'
       ];
 

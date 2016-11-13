@@ -3,7 +3,6 @@ var utils = require('../src/utils');
 
 describe('Utils', function() {
   var getRequireString = utils.getRequireString;
-  var getFileNameFromFilePath = utils.getFileNameFromFilePath;
 
   var path = 'path';
   var name = 'name';
@@ -36,10 +35,10 @@ describe('Utils', function() {
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, \'\');',
+        '  }, \'name\');',
         '})'
       ];
-      getRequireLoader('path', 'name', true).should.eql(result.join(''));
+      getRequireLoader('path', 'name', 'name', true).should.eql(result.join(''));
     });
   });
 
@@ -105,12 +104,6 @@ describe('Utils', function() {
 
     it('should return the filename for a given path without an extension', function() {
       getFilename('path/to/module.ngfactory.ts').should.eql('module.ngfactory');
-    });
-  });
-
-  describe('getFileNameFromFilePath', function() {
-    it('should return the filename for a given loginChildren path without a file specification and an extension', function() {
-      getFileNameFromFilePath('path/file.module#NameModule').should.eql('file');
     });
   });
 });
