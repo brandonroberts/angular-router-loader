@@ -30,7 +30,7 @@ describe('Utils', function() {
   describe('getRequireLoader', function() {
     var getRequireLoader = utils.getRequireLoader;
 
-    it('should return an asynchronous require loadChildren statement', function() {
+    it('should return an asynchronous require loadChildren statement with chunkName parameter', function() {
       var result = [
         'loadChildren: () => new Promise(function (resolve) {',
         '  (require as any).ensure([], function (require: any) {',
@@ -40,6 +40,18 @@ describe('Utils', function() {
       ];
       getRequireLoader('path', 'name', 'name', true).should.eql(result.join(''));
     });
+
+    it('should return an asynchronous require loadChildren statement without chunkName parameter', function() {
+      var result = [
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  (require as any).ensure([], function (require: any) {',
+        '    resolve(' + getRequireString(path, name) + ');',
+        '  });',
+        '})'
+      ];
+      getRequireLoader('path', undefined, 'name', true).should.eql(result.join(''));
+    });
+
   });
 
   describe('getSystemLoader', function() {
