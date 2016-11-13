@@ -112,7 +112,7 @@ replacement
 }
 ```
 
-## Lazy Loading options
+## Lazy Loading Options
 
 ### chunkName (require loader only)
 
