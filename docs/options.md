@@ -111,3 +111,29 @@ replacement
   })
 }
 ```
+
+## Lazy Loading options
+
+### chunkName (require loader only)
+
+Allows you to provide [named chunks](http://webpack.github.io/docs/code-splitting.html#named-chunks) for code splitting.
+
+original
+```ts
+{
+  path: 'lazy',
+  loadChildren './lazy.module#LazyModule?chunkName=MyChunk'
+}
+```
+
+replacement
+```ts
+{
+  path: 'lazy',
+  loadChildren: () => new Promise(function (resolve) {
+    (require as any).ensure([], function (require: any) {
+      resolve(require('./lazy/lazy.module')['LazyModule']);
+    }, 'MyChunk');
+  })
+}
+```
