@@ -53,7 +53,7 @@ export const routes: Routes = [
 
 * [Loader Options](./docs/options.md#general-loader-options)
 * [AoT Compilation Options](./docs/options.md#loader-options-aot-compilation)
-
+* [Lazy Loading Options](./docs/options.md#lazy-loading-options)
 
 
 ## Credits
