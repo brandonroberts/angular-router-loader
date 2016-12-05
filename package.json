@@ -1,6 +1,6 @@
 {
-  "name": "angular2-router-loader",
-  "version": "0.3.4",
+  "name": "angular-router-loader",
+  "version": "0.4.0",
   "description": "A webpack loader for Angular that enables string-based module loading with the Angular Router",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test:watch": "npm run test -- -w"
   },
   "keywords": [
-    "angular2",
+    "angular",
     "webpack",
     "loader",
     "router",
@@ -21,11 +21,11 @@
     "loader-utils": "^0.2.15"
   },
   "bugs": {
-    "url": "https://github.com/brandonroberts/angular2-router-loader/issues"
+    "url": "https://github.com/brandonroberts/angular-router-loader/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brandonroberts/angular2-router-loader.git"
+    "url": "git+https://github.com/brandonroberts/angular-router-loader.git"
   },
   "devDependencies": {
     "conventional-changelog-cli": "^1.2.0",

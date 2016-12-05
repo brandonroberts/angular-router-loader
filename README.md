@@ -1,17 +1,19 @@
-# angular2-router-loader
+# angular-router-loader
 
-[![CircleCI](https://circleci.com/gh/brandonroberts/angular2-router-loader.svg?style=shield&circle-token=a8a709588d22664ab74922050eda672898d2d417)](https://circleci.com/gh/brandonroberts/angular2-router-loader)
-[![npm version](https://badge.fury.io/js/angular2-router-loader.svg)](https://badge.fury.io/js/angular2-router-loader)
+[![CircleCI](https://circleci.com/gh/brandonroberts/angular-router-loader.svg?style=shield&circle-token=a8a709588d22664ab74922050eda672898d2d417)](https://circleci.com/gh/brandonroberts/angular-router-loader)
+[![npm version](https://badge.fury.io/js/angular-router-loader.svg)](https://badge.fury.io/js/angular-router-loader)
 
 A Webpack loader for Angular that enables string-based module loading with the `Angular Router`
 
+*Package was previously named `angular2-router-loader`*
+
 ## Installation
 
-  `npm install angular2-router-loader --save-dev`
+  `npm install angular-router-loader --save-dev`
 
 ## Usage
 
-Add the `angular2-router-loader` to your typescript loaders
+Add the `angular-router-loader` to your typescript loaders
 
 ```ts
 loaders: [
@@ -19,7 +21,7 @@ loaders: [
     test: /\.ts$/,
     loaders: [
       'awesome-typescript-loader',
-      'angular2-router-loader'
+      'angular-router-loader'
     ]
   }
 ]
