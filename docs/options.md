@@ -1,10 +1,10 @@
 ## General Loader Options
 
-Options are provided as a query string with the `angular2-router-loader`
+Options are provided as a query string with the `angular-router-loader`
 
 ```ts
 loaders: [
-  'angular2-router-loader?option=value'
+  'angular-router-loader?option=value'
 ]
 
 ```
@@ -86,7 +86,7 @@ loaders: [
     test: /\.ts$/,
     loaders: [
       'awesome-typescript-loader',
-      'angular2-router-loader?aot=true&genDir=src/compiled/src/app'
+      'angular-router-loader?aot=true&genDir=src/compiled/src/app'
     ]
   }
 ]

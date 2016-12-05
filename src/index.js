@@ -68,10 +68,10 @@ module.exports = function(source, sourcemap) {
     }
 
     if (debug) {
-      console.log('[angular2-router-loader]: --DEBUG--');
-      console.log('[angular2-router-loader]: File: ' + resourcePath);
-      console.log('[angular2-router-loader]: Original: ' + match);
-      console.log('[angular2-router-loader]: Replacement: ' + replacement);
+      console.log('[angular-router-loader]: --DEBUG--');
+      console.log('[angular-router-loader]: File: ' + resourcePath);
+      console.log('[angular-router-loader]: Original: ' + match);
+      console.log('[angular-router-loader]: Replacement: ' + replacement);
     }
 
     return replacement;
