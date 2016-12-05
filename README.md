@@ -5,6 +5,8 @@
 
 A Webpack loader for Angular that enables string-based module loading with the `Angular Router`
 
+*Package was previously named `angular2-router-loader`*
+
 ## Installation
 
   `npm install angular-router-loader --save-dev`
