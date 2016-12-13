@@ -35,7 +35,7 @@ In your route configuration, use `loadChildren` with a relative path to your laz
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: 'lazy', loadChildren './lazy.module#LazyModule' }
+  { path: 'lazy', loadChildren: './lazy.module#LazyModule' }
 ];
 ```
 
@@ -47,7 +47,7 @@ For synchronous module loading, add the `sync=true` as a query string value to y
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: 'lazy', loadChildren './lazy.module#LazyModule?sync=true' }
+  { path: 'lazy', loadChildren: './lazy.module#LazyModule?sync=true' }
 ];
 ```
 
