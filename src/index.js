@@ -19,7 +19,7 @@ module.exports = function(source, sourcemap) {
   var loader = query.loader || 'require';
   var genDir = query.genDir || '';
   var inline = query.inline || true;
-  var debug = this.debug || query.debug;
+  var debug = (typeof query.debug !== 'boolean' ? this.debug : query.debug);
 
   // get the filename path
   var resourcePath = this.resourcePath;
