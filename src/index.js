@@ -20,7 +20,8 @@ module.exports = function(source, sourcemap) {
   var genDir = query.genDir || '';
   var inline = query.inline || true;
   var debug = (typeof query.debug !== 'boolean' ? this.debug : query.debug);
-
+  var baseDir = query.baseDir || path.dirname(this.resourcePath);
+  
   // get the filename path
   var resourcePath = this.resourcePath;
   var filename = utils.getFilename(resourcePath);
@@ -48,6 +49,8 @@ module.exports = function(source, sourcemap) {
 
     // update the file path for non-ngfactory files
     if (aot && filename.substr(-9) !== moduleSuffix.substr(-9) && isRelativePath) {
+      filePath = path.relative(baseDir, path.join(path.dirname(resourcePath), filePath));
+      
       // find the relative dir to file from the genDir
       var relativeDir = path.relative(path.dirname(resourcePath), path.resolve(genDir));
 
