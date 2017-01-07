@@ -20,6 +20,7 @@ module.exports = function(source, sourcemap) {
   var genDir = query.genDir || '';
   var inline = query.inline || true;
   var debug = (typeof query.debug !== 'boolean' ? this.debug : query.debug);
+  var baseDir = query.baseDir || process.cwd();
 
   // get the filename path
   var resourcePath = this.resourcePath;
@@ -48,7 +49,6 @@ module.exports = function(source, sourcemap) {
 
     // update the file path for non-ngfactory files
     if (aot && filename.substr(-9) !== moduleSuffix.substr(-9) && isRelativePath) {
-
       // the full path of the directory of the current resource
       var currentDir = path.dirname(resourcePath);
 
@@ -72,8 +72,8 @@ module.exports = function(source, sourcemap) {
          If "tsconfig.json" is in the root of the project it's identical.
          */
 
-        var relativeNgModulePath = path.relative(process.cwd(), absoluteNgModulePath);
-        absoluteNgModulePath = path.join(path.resolve(process.cwd(), genDir), relativeNgModulePath);
+        var relativeNgModulePath = path.relative(baseDir, absoluteNgModulePath);
+        absoluteNgModulePath = path.join(path.resolve(baseDir, genDir), relativeNgModulePath);
       }
 
 
