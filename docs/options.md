@@ -74,7 +74,7 @@ tsconfig.json (Angular Compiler Options)
 
 ```json
 "angularCompilerOptions": {
-  "genDir": "src/compiled",
+  "genDir": "compiled",
   "skipMetadataEmit" : true
 }
 ```
@@ -86,7 +86,7 @@ loaders: [
     test: /\.ts$/,
     loaders: [
       'awesome-typescript-loader',
-      'angular-router-loader?aot=true&genDir=src/compiled/src/app'
+      'angular-router-loader?aot=true&genDir=compiled'
     ]
   }
 ]
