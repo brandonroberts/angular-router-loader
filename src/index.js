@@ -20,6 +20,7 @@ module.exports = function(source, sourcemap) {
   var genDir = query.genDir || '';
   var inline = query.inline || true;
   var debug = (typeof query.debug !== 'boolean' ? this.debug : query.debug);
+  var baseDir = query.baseDir || process.cwd();
 
   // get the filename path
   var resourcePath = this.resourcePath;
@@ -48,11 +49,36 @@ module.exports = function(source, sourcemap) {
 
     // update the file path for non-ngfactory files
     if (aot && filename.substr(-9) !== moduleSuffix.substr(-9) && isRelativePath) {
-      // find the relative dir to file from the genDir
-      var relativeDir = path.relative(path.dirname(resourcePath), path.resolve(genDir));
+      // the full path of the directory of the current resource
+      var currentDir = path.dirname(resourcePath);
 
-      // build the relative path from the genDir
-      filePath = path.join(relativeDir, filePath);
+      // the absolute path of our destenation NgModule module.
+      var absoluteNgModulePath = path.resolve(currentDir, filePath);
+
+      /*
+       *  If "genDir" is empty the compiler emits to the source tree, next to the original component source code.
+       *  absoluteNgModulePath points to there so we're good.
+       *
+       *  If "genDir" exist need to map the path based on "genDir"
+       */
+      if (genDir && genDir !== '.') {
+
+        /*
+         "genDir" is tricky.
+         The path used for "genDir" is resolved relative to the "tsconfig.json" file used to execute ngc.
+         This out of the context of webpack so we can't figure this out automatically.
+         The user needs to set a "genDir" relative to the root of the project which should resolve to the same absolute path ngc resolves for "genDir".
+
+         If "tsconfig.json" is in the root of the project it's identical.
+         */
+
+        var relativeNgModulePath = path.relative(baseDir, absoluteNgModulePath);
+        absoluteNgModulePath = path.join(path.resolve(baseDir, genDir), relativeNgModulePath);
+      }
+
+
+      // filePath is an absolute path, we need the relative filePath:
+      filePath = path.relative(currentDir, absoluteNgModulePath);
     }
 
     filePath = utils.normalizeFilePath(filePath, isRelativePath);

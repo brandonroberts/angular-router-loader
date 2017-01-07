@@ -1,5 +1,16 @@
-<a name="0.4.0"></a>
-# [0.4.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.3.4...v0.4.0) (2016-12-05)
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.3.4...v0.5.0) (2017-01-07)
+
+
+### Bug Fixes
+
+* **docs:** Fix colons in readme.md ([#36](https://github.com/brandonroberts/angular-router-loader/issues/36)) ([58db6de](https://github.com/brandonroberts/angular-router-loader/commit/58db6de))
+* **loader:** Prefer the query 'debug' parameter to the global value ([#37](https://github.com/brandonroberts/angular-router-loader/issues/37)) ([b96316c](https://github.com/brandonroberts/angular-router-loader/commit/b96316c))
+
+
+### Features
+
+* **loader:** Added support for nested lazy loading in AOT ([a2fb4d6](https://github.com/brandonroberts/angular-router-loader/commit/a2fb4d6))
 
 
 
