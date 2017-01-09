@@ -64,10 +64,13 @@ In your `tsconfig.json`, if you set the `genDir` in the `angularCompilerOptions`
 
 ## AoT example
 
-Example file structure
+Example file structure (after an AOT build)
 ```
-|-- src  
-   |-- app  
+|-- compiled
+   |-- src
+      |-- app
+|-- src
+   |-- app
 |-- tsconfig.json
 ```
 tsconfig.json (Angular Compiler Options)
