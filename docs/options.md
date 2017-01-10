@@ -60,14 +60,17 @@ load the Angular compiled factory file and factory class based on the provided f
 
 ### genDir `(default: '')`
 
-In your `tsconfig.json`, if you set the `genDir` in the `angularCompilerOptions` to compile to a separate directory, this option needs to be set to the relative path to your application directory.
+In your `tsconfig.json`, if you set the `genDir` in the `angularCompilerOptions` to compile to a separate directory, this option needs to be set to the same value here.
 
 ## AoT example
 
-Example file structure
+Example file structure (after an AOT build)
 ```
-|-- src  
-   |-- app  
+|-- compiled
+   |-- src
+      |-- app
+|-- src
+   |-- app
 |-- tsconfig.json
 ```
 tsconfig.json (Angular Compiler Options)
