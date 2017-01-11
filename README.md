@@ -39,6 +39,11 @@ export const routes: Routes = [
 ];
 ```
 
+**NOTE**: When specifying a relative path to lazy loaded module, one of the following two conditions *must* hold:
+
+* The lazy loaded route is defined in the same module file where it is added by `RouterModule.forXxx()`
+* The lazy loaded route is defined in a separate routing file, and that routing file is a sibling of module file (hence the routing file cannot be e.g. in a subdirectory).
+
 ## Synchronous Loading
 
 For synchronous module loading, add the `sync=true` as a query string value to your `loadChildren` string. The module will be included in your bundle and not lazy-loaded.
