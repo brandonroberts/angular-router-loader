@@ -9,7 +9,7 @@ module.exports = function(source, sourcemap) {
   var loadChildrenRegex = /loadChildren[\s]*:[\s]*['|"](.*?)['|"]/gm;
 
   // parse query params
-  var query = loaderUtils.parseQuery(this.query);
+  var query = loaderUtils.getOptions(this) || {};
 
   // get query options
   var delimiter = query.delimiter || '#';
@@ -30,7 +30,7 @@ module.exports = function(source, sourcemap) {
     // check for query string in loadString
     var queryIndex = loadString.lastIndexOf('?');
     var hasQuery = queryIndex !== -1;
-    var loadStringQuery = hasQuery ? loaderUtils.parseQuery(loadString.substr(queryIndex)) : {};
+    var loadStringQuery = hasQuery ? loaderUtils.getOptions(loadString.substr(queryIndex)) : {};
     var sync = !!loadStringQuery.sync;
     var chunkName = loadStringQuery.chunkName || undefined;
     var isRelativePath = loadString.startsWith('.');

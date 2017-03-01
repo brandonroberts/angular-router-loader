@@ -18,7 +18,7 @@
   "author": "Brandon Roberts",
   "license": "MIT",
   "dependencies": {
-    "loader-utils": "^0.2.15"
+    "loader-utils": "^1.0.2"
   },
   "bugs": {
     "url": "https://github.com/brandonroberts/angular-router-loader/issues"
