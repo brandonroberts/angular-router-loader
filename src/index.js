@@ -30,7 +30,7 @@ module.exports = function(source, sourcemap) {
     // check for query string in loadString
     var queryIndex = loadString.lastIndexOf('?');
     var hasQuery = queryIndex !== -1;
-    var loadStringQuery = hasQuery ? loaderUtils.getOptions(loadString.substr(queryIndex)) : {};
+    var loadStringQuery = hasQuery ? loaderUtils.getOptions({ query: loadString.substr(queryIndex) }) : {};
     var sync = !!loadStringQuery.sync;
     var chunkName = loadStringQuery.chunkName || undefined;
     var isRelativePath = loadString.startsWith('.');
