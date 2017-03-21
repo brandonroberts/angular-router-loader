@@ -19,6 +19,7 @@ module.exports = function(source, sourcemap) {
   var loader = query.loader || 'require';
   var genDir = query.genDir || '';
   var inline = query.inline || true;
+  var es = !!query.es;
   var debug = (typeof query.debug !== 'boolean' ? this.debug : query.debug);
   var baseDir = query.baseDir || process.cwd();
 
@@ -90,7 +91,7 @@ module.exports = function(source, sourcemap) {
     } else if (loader === 'system') {
       replacement = utils.getSystemLoader(filePath, moduleName, inline);
     } else {
-      replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline);
+      replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline, es);
     }
 
     if (debug) {
