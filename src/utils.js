@@ -17,17 +17,28 @@ module.exports.getSyncLoader = function(filePath, moduleName, inline) {
   return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inline) {
+module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inline, es){
   var requireString = module.exports.getRequireString(filePath, moduleName);
   var webpackChunkName = chunkName ? ', \'' + chunkName + '\'' : '';
+  var result;
 
-  var result = [
-    'loadChildren: () => new Promise(function (resolve) {',
-    '  (require as any).ensure([], function (require: any) {',
-    '    resolve(' + requireString + ');',
-    '  }' + webpackChunkName + ');',
-    '})'
-  ];
+  if(es) {
+    result = [
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  require.ensure([], function () {',
+      '    resolve(' + requireString + ');',
+      '  }' + webpackChunkName + ');',
+      '})'
+    ];
+  } else {
+    result = [
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  (require as any).ensure([], function (require: any) {',
+      '    resolve(' + requireString + ');',
+      '  }' + webpackChunkName + ');',
+      '})'
+    ];
+  }
 
   return inline ? result.join('') : result.join('\n');
 };
