@@ -1,16 +1,19 @@
-<a name="0.5.0"></a>
-# [0.5.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.3.4...v0.5.0) (2017-01-07)
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.3.4...v0.6.0) (2017-03-29)
 
 
 ### Bug Fixes
 
+* **deps:** Updated webpack/loader-utils version to fix deprecation warning ([#61](https://github.com/brandonroberts/angular-router-loader/issues/61)) ([979ae85](https://github.com/brandonroberts/angular-router-loader/commit/979ae85))
+* **docs:** Clarify `genDir` option usage ([#51](https://github.com/brandonroberts/angular-router-loader/issues/51)) ([b6f46b3](https://github.com/brandonroberts/angular-router-loader/commit/b6f46b3))
 * **docs:** Fix colons in readme.md ([#36](https://github.com/brandonroberts/angular-router-loader/issues/36)) ([58db6de](https://github.com/brandonroberts/angular-router-loader/commit/58db6de))
+* **loader:** Fixed bug when using query string with loadChildren ([#62](https://github.com/brandonroberts/angular-router-loader/issues/62)) ([8616eae](https://github.com/brandonroberts/angular-router-loader/commit/8616eae))
 * **loader:** Prefer the query 'debug' parameter to the global value ([#37](https://github.com/brandonroberts/angular-router-loader/issues/37)) ([b96316c](https://github.com/brandonroberts/angular-router-loader/commit/b96316c))
 
 
 ### Features
 
-* **loader:** Added support for nested lazy loading in AOT ([a2fb4d6](https://github.com/brandonroberts/angular-router-loader/commit/a2fb4d6))
+* **loader:** Added support for plain JavaScript async require statement ([#69](https://github.com/brandonroberts/angular-router-loader/issues/69)) ([7714e1f](https://github.com/brandonroberts/angular-router-loader/commit/7714e1f))
 
 
 
