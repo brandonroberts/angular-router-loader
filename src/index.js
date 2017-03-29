@@ -25,6 +25,7 @@ module.exports = function(source, sourcemap) {
   // get the filename path
   var resourcePath = this.resourcePath;
   var filename = utils.getFilename(resourcePath);
+  var isJs = path.extname(resourcePath).toLowerCase() === '.js';
 
   var replacedSource = source.replace(loadChildrenRegex, function(match, loadString) {
     // check for query string in loadString
@@ -90,7 +91,7 @@ module.exports = function(source, sourcemap) {
     } else if (loader === 'system') {
       replacement = utils.getSystemLoader(filePath, moduleName, inline);
     } else {
-      replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline);
+      replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline, isJs);
     }
 
     if (debug) {

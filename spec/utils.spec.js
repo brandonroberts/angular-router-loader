@@ -52,6 +52,17 @@ describe('Utils', function() {
       getRequireLoader('path', undefined, 'name', true).should.eql(result.join(''));
     });
 
+    it('should return an asynchronous require loadChildren statement with vanilla javascript', function() {
+      var result = [
+        'loadChildren: () => new Promise(function (resolve) {',
+        '  require.ensure([], function (require) {',
+        '    resolve(' + getRequireString(path, name) + ');',
+        '  }, \'name\');',
+        '})'
+      ];
+      getRequireLoader('path', 'name', 'name', true, true).should.eql(result.join(''));
+    });
+
   });
 
   describe('getSystemLoader', function() {

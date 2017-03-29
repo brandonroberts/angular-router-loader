@@ -96,6 +96,23 @@ describe('Loader', function() {
     checkResult(loadedString, result);
   });
 
+  it('should return a plain javascript loadChildren async require statement', function() {
+    var result = [
+      'loadChildren: () => new Promise(function (resolve) {',
+      '  require.ensure([], function (require) {',
+      '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
+      '  });',
+      '})'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath.replace('.ts', '.js'),
+      query: query
+    }, `loadChildren: '${modulePath}'`);
+
+    checkResult(loadedString, result);
+  });
+
   it('should return a loadChildren sync require statement', function() {
     var result = [
       'loadChildren: function() {',
