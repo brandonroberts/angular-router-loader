@@ -1,6 +1,6 @@
 {
   "name": "angular-router-loader",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A webpack loader for Angular that enables string-based module loading with the Angular Router",
   "main": "src/index.js",
   "scripts": {
