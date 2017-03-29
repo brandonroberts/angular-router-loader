@@ -17,13 +17,13 @@ module.exports.getSyncLoader = function(filePath, moduleName, inline) {
   return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inline) {
+module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inline, isJs) {
   var requireString = module.exports.getRequireString(filePath, moduleName);
   var webpackChunkName = chunkName ? ', \'' + chunkName + '\'' : '';
 
   var result = [
     'loadChildren: () => new Promise(function (resolve) {',
-    '  (require as any).ensure([], function (require: any) {',
+    '  ' + (isJs ? 'require' : '(require as any)') + '.ensure([], function (' + (isJs ? 'require' : 'require: any') + ') {',
     '    resolve(' + requireString + ');',
     '  }' + webpackChunkName + ');',
     '})'
