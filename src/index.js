@@ -6,7 +6,7 @@ module.exports = function(source, sourcemap) {
   this.cacheable && this.cacheable();
 
   // regex for loadChildren string
-  var loadChildrenRegex = /loadChildren[\s]*:[\s]*['|"](.*?)['|"]/gm;
+  var loadChildrenRegex = /["']?loadChildren["']?[\s]*:[\s]*['|"](.*?)['|"]/gm;
 
   // parse query params
   var query = loaderUtils.getOptions(this) || {};
