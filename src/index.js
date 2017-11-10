@@ -90,6 +90,8 @@ module.exports = function(source, sourcemap) {
       replacement = utils.getSyncLoader(filePath, moduleName, inline);
     } else if (loader === 'system') {
       replacement = utils.getSystemLoader(filePath, moduleName, inline);
+    } else if (loader === 'import') {
+      replacement = utils.getImportLoader(filePath, moduleName, inline);
     } else {
       replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline, isJs);
     }
