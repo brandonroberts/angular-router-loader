@@ -45,9 +45,19 @@ replacement
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => System.import('./lazy/lazy.module').then(function(module) {
-    return module['LazyModule'];
-  })
+  loadChildren: () => System.import('./lazy/lazy.module').then(module => module['LazyModule'])
+}
+```
+
+If you prefer to use `dynamic import`, set the `loader` to `import`
+
+**NOTE:** Using `import` only works with Webpack >= 2.1.0-beta.28.
+
+replacement
+```ts
+{
+  path: 'lazy',
+  loadChildren: () => import('./lazy/lazy.module').then(module => module['LazyModule'])
 }
 ```
 
