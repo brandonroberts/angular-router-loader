@@ -6,7 +6,7 @@ module.exports = function(source, sourcemap) {
   this.cacheable && this.cacheable();
 
   // regex for loadChildren string
-  var loadChildrenRegex = /["']?loadChildren["']?[\s]*:[\s]*['|"](.*?)['|"]/gm;
+  var loadChildrenRegex = /["']?loadChildren["']?[\s]*:[\s]*['|"](.*#{1}.*)['|"]/gm;
 
   // parse query params
   var query = loaderUtils.getOptions(this) || {};
@@ -26,7 +26,7 @@ module.exports = function(source, sourcemap) {
   var resourcePath = this.resourcePath;
   var filename = utils.getFilename(resourcePath);
   var isJs = path.extname(resourcePath).toLowerCase() === '.js';
-
+  
   var replacedSource = source.replace(loadChildrenRegex, function(match, loadString) {
     // check for query string in loadString
     var queryIndex = loadString.lastIndexOf('?');
