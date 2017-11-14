@@ -35,9 +35,16 @@ module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inli
 module.exports.getSystemLoader = function(filePath, moduleName, inline) {
   var result = [
     'loadChildren: () => System.import(\'' + filePath + '\')',
-    '  .then(function(module) {',
-    '    return module[\'' + moduleName + '\'];',
-    '  })'
+    '  .then(module => module[\'' + moduleName + '\'])'
+  ];
+
+  return inline ? result.join('') : result.join('\n');
+};
+
+module.exports.getImportLoader = function(filePath, moduleName, inline) {
+  var result = [
+    'loadChildren: () => import(\'' + filePath + '\')',
+    '  .then(module => module[\'' + moduleName + '\'])'
   ];
 
   return inline ? result.join('') : result.join('\n');

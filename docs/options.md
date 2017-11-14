@@ -37,7 +37,7 @@ replacement
 }
 ```
 
-If you prefer to use `System.import`, set the `loader` to `system`
+To use `System.import`, set the `loader` to `system`
 
 **NOTE:** Using `system` only works with Webpack 2. Webpack 1 users should use the default.
 
@@ -45,9 +45,19 @@ replacement
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => System.import('./lazy/lazy.module').then(function(module) {
-    return module['LazyModule'];
-  })
+  loadChildren: () => System.import('./lazy/lazy.module').then(module => module['LazyModule'])
+}
+```
+
+To use `dynamic import`, set the `loader` to `import`
+
+**NOTE:** Using `import` only works with Webpack >= 2.1.0.
+
+replacement
+```ts
+{
+  path: 'lazy',
+  loadChildren: () => import('./lazy/lazy.module').then(module => module['LazyModule'])
 }
 ```
 

@@ -71,12 +71,23 @@ describe('Utils', function() {
     it('should return an asynchronous System.import loadChildren statement', function() {
       var result = [
         'loadChildren: () => System.import(\'' + path + '\')',
-        '  .then(function(module) {',
-        '    return module[\'' + name + '\'];',
-        '  })'
+        '  .then(module => module[\'' + name + '\'])'
       ];
 
       getSystemLoader('path', 'name', true).should.eql(result.join(''));
+    });
+  });
+
+  describe('getImportLoader', function() {
+    var getImportLoader = utils.getImportLoader;
+
+    it('should return an asynchronous dynamic import loadChildren statement', function() {
+      var result = [
+        'loadChildren: () => import(\'' + path + '\')',
+        '  .then(module => module[\'' + name + '\'])'
+      ];
+
+      getImportLoader('path', 'name', true).should.eql(result.join(''));
     });
   });
 

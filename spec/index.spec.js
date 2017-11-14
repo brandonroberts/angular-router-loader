@@ -162,14 +162,26 @@ describe('Loader', function() {
   it ('should return a loadChildren System.import statement', function() {
     var result = [
       'loadChildren: () => System.import(\'./path/to/file.module\')',
-      '  .then(function(module) {',
-      '    return module[\'FileModule\'];',
-      '  })'
+      '  .then(module => module[\'FileModule\'])'
     ];
 
     var loadedString = loader.call({
       resourcePath: resourcePath,
       query: '?loader=system'
+    }, `loadChildren: '${modulePath}'`);
+
+    checkResult(loadedString, result);
+  });
+
+  it ('should return a loadChildren dynamic import statement', function() {
+    var result = [
+      'loadChildren: () => import(\'./path/to/file.module\')',
+      '  .then(module => module[\'FileModule\'])'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath,
+      query: '?loader=import'
     }, `loadChildren: '${modulePath}'`);
 
     checkResult(loadedString, result);
@@ -290,14 +302,26 @@ describe('Loader', function() {
     it ('should return a loadChildren System.import statement', function() {
       var result = [
         'loadChildren: () => System.import(\'./path/to/file.module.ngfactory\')',
-        '  .then(function(module) {',
-        '    return module[\'FileModuleNgFactory\'];',
-        '  })'
+        '  .then(module => module[\'FileModuleNgFactory\'])'
       ];
 
       var loadedString = loader.call({
         resourcePath: resourcePath,
         query: query + '&loader=system'
+      }, `loadChildren: '${modulePath}'`);
+
+      checkResult(loadedString, result);
+    });
+
+    it ('should return a loadChildren dynamic import statement', function() {
+      var result = [
+        'loadChildren: () => import(\'./path/to/file.module.ngfactory\')',
+        '  .then(module => module[\'FileModuleNgFactory\'])'
+      ];
+
+      var loadedString = loader.call({
+        resourcePath: resourcePath,
+        query: query + '&loader=import'
       }, `loadChildren: '${modulePath}'`);
 
       checkResult(loadedString, result);
