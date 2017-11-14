@@ -24,7 +24,21 @@ describe('Loader', function() {
       `loadChildren: "${modulePath}"`,
       `loadChildren:"${modulePath}"`,
       `loadChildren :"${modulePath}"`,
-      `loadChildren : "${modulePath}"`
+      `loadChildren : "${modulePath}"`,
+
+      `"loadChildren":"${modulePath}"`,
+      `"loadChildren": "${modulePath}"`,
+      `"loadChildren" : "${modulePath}"`,
+      `"loadChildren" :  "${modulePath}"`,
+      `"loadChildren"  :"${modulePath}"`,
+      `"loadChildren"  : "${modulePath}"`,
+
+      `'loadChildren':"${modulePath}"`,
+      `'loadChildren': "${modulePath}"`,
+      `'loadChildren' : "${modulePath}"`,
+      `'loadChildren' :  "${modulePath}"`,
+      `'loadChildren'  :"${modulePath}"`,
+      `'loadChildren'  : "${modulePath}"`
     ];
 
     loadStrings.forEach(function(loadString) {
