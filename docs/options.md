@@ -37,7 +37,7 @@ replacement
 }
 ```
 
-If you prefer to use `System.import`, set the `loader` to `system`
+To use `System.import`, set the `loader` to `system`
 
 **NOTE:** Using `system` only works with Webpack 2. Webpack 1 users should use the default.
 
@@ -49,9 +49,9 @@ replacement
 }
 ```
 
-If you prefer to use `dynamic import`, set the `loader` to `import`
+To use `dynamic import`, set the `loader` to `import`
 
-**NOTE:** Using `import` only works with Webpack >= 2.1.0-beta.28.
+**NOTE:** Using `import` only works with Webpack >= 2.1.0.
 
 replacement
 ```ts
