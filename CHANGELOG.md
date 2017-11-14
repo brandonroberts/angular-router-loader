@@ -1,3 +1,19 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.6.0...v0.7.0) (2017-11-14)
+
+
+### Bug Fixes
+
+* **docs:** Added updated changelog ([7d1f7f3](https://github.com/brandonroberts/angular-router-loader/commit/7d1f7f3))
+
+
+### Features
+
+* **loader:** Add support for dynamic import ([#90](https://github.com/brandonroberts/angular-router-loader/issues/90)) ([a9835ab](https://github.com/brandonroberts/angular-router-loader/commit/a9835ab))
+* **loader:** Update regex to be able to use double-quotes and single-quotes ([#80](https://github.com/brandonroberts/angular-router-loader/issues/80)) ([0444b6e](https://github.com/brandonroberts/angular-router-loader/commit/0444b6e))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.3.4...v0.6.0) (2017-03-29)
 
