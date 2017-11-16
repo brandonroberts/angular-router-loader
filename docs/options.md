@@ -70,6 +70,8 @@ load the Angular compiled factory file and factory class based on the provided f
 
 ### genDir `(default: '')`
 
+**NOTE:** Angular version < 5 only
+
 In your `tsconfig.json`, if you set the `genDir` in the `angularCompilerOptions` to compile to a separate directory, this option needs to be set to the same value here.
 
 ## AoT example
@@ -93,6 +95,28 @@ tsconfig.json (Angular Compiler Options)
 ```
 
 Webpack Configuration (TypeScript loaders)
+
+**Angular Version >= 5**
+
+```ts
+loaders: [
+  {
+    test: /\.ts$/,
+    loaders: [
+      'awesome-typescript-loader'
+    ]
+  },
+  {
+    test: /\.(ts|js)$/,
+    loaders: [
+      'angular-router-loader?aot=true'
+    ]
+  }  
+]
+```
+
+**Angular Version < 5**
+
 ```ts
 loaders: [
   {
@@ -101,7 +125,7 @@ loaders: [
       'awesome-typescript-loader',
       'angular-router-loader?aot=true&genDir=compiled'
     ]
-  }
+  }  
 ]
 ```
 
