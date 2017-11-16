@@ -15,6 +15,27 @@ A Webpack loader for Angular that enables string-based module loading with the `
 
 Add the `angular-router-loader` to your typescript loaders
 
+**Angular Version >= 5**
+
+```ts
+loaders: [
+  {
+    test: /\.ts$/,
+    loaders: [
+      'awesome-typescript-loader'
+    ]
+  },
+  {
+    test: /\.(ts|js)$/,
+    loaders: [
+      'angular-router-loader'
+    ]
+  }  
+]
+```
+
+**Angular Version < 5**
+
 ```ts
 loaders: [
   {
@@ -23,7 +44,7 @@ loaders: [
       'awesome-typescript-loader',
       'angular-router-loader'
     ]
-  }
+  }  
 ]
 ```
 
