@@ -29,9 +29,11 @@ replacement
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => new Promise(function (resolve) {
+  loadChildren: () => new Promise(function (resolve, reject) {
     (require as any).ensure([], function (require: any) {
       resolve(require('./lazy/lazy.module')['LazyModule']);
+    }, function () {
+      reject({ loadChunkError: true });
     });
   })
 }
@@ -45,19 +47,19 @@ replacement
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => System.import('./lazy/lazy.module').then(module => module['LazyModule'])
+  loadChildren: () => System.import('./lazy/lazy.module')
+    .then(module => module['LazyModule'], () => { throw({ loadChunkError: true }); })
 }
 ```
 
 To use `dynamic import`, set the `loader` to `import`
 
-**NOTE:** Using `import` only works with Webpack >= 2.1.0.
-
 replacement
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => import('./lazy/lazy.module').then(module => module['LazyModule'])
+  loadChildren: () => import('./lazy/lazy.module')
+    .then(module => module['LazyModule'], () => { throw({ loadChunkError: true }); })
 }
 ```
 
@@ -144,6 +146,8 @@ replacement
   loadChildren: () => new Promise(function (resolve) {
     (require as any).ensure([], function (require: any) {
       resolve(require('./lazy/lazy.module.ngfactory')['LazyModuleNgFactory']);
+    }, function () {
+      reject({ loadChunkError: true });
     });
   })
 }
@@ -170,6 +174,8 @@ replacement (require loader)
   loadChildren: () => new Promise(function (resolve) {
     (require as any).ensure([], function (require: any) {
       resolve(require('./lazy/lazy.module')['LazyModule']);
+    }, function () {
+      reject({ loadChunkError: true });
     }, 'MyChunk');
   })
 }
@@ -179,7 +185,8 @@ replacement (system loader)
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => System.import(/* webpackChunkName: "MyChunk" */ './lazy/lazy.module').then(module => module['LazyModule'])
+  loadChildren: () => System.import(/* webpackChunkName: "MyChunk" */ './lazy/lazy.module')
+    .then(module => module['LazyModule'], () => { throw({ loadChunkError: true }); })
 }
 ```
 
@@ -187,6 +194,7 @@ replacement (import loader)
 ```ts
 {
   path: 'lazy',
-  loadChildren: () => import(/* webpackChunkName: "MyChunk" */ './lazy/lazy.module').then(module => module['LazyModule'])
+  loadChildren: () => import(/* webpackChunkName: "MyChunk" */ './lazy/lazy.module')
+    .then(module => module['LazyModule'], () => { throw({ loadChunkError: true }); })
 }
 ```
