@@ -148,4 +148,24 @@ describe('Utils', function() {
       getFilename('path/to/module.ngfactory.ts').should.eql('module.ngfactory');
     });
   });
+
+  describe('getChunkName', function() {
+    var getChunkName = utils.getChunkName;
+    
+    it('should return the chunkName string for a system loader and provided chunkName', function() {
+      getChunkName('system', 'name').should.eql('/* webpackChunkName: "name" */ ');
+    });
+
+    it('should return the chunkName string for a import loader and provided chunkName', function() {
+      getChunkName('import', 'name').should.eql('/* webpackChunkName: "name" */ ');
+    });
+
+    it('should return the chunkName string for a require loader and provided chunkName', function() {
+      getChunkName('require', 'name').should.eql(', \'name\'');
+    });
+
+    it('should return an empty chunkName string for a loader and an empty chunkName', function() {
+      getChunkName('require', '').should.eql('');
+    });
+  });
 });

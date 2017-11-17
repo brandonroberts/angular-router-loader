@@ -173,6 +173,20 @@ describe('Loader', function() {
     checkResult(loadedString, result);
   });
 
+  it ('should return a loadChildren chunkName System.import statement', function() {
+    var result = [
+      'loadChildren: () => System.import(/* webpackChunkName: "name" */ \'./path/to/file.module\')',
+      '  .then(module => module[\'FileModule\'])'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath,
+      query: '?loader=system'
+    }, `loadChildren: '${modulePath}?chunkName=name'`);
+
+    checkResult(loadedString, result);
+  });
+
   it ('should return a loadChildren dynamic import statement', function() {
     var result = [
       'loadChildren: () => import(\'./path/to/file.module\')',
@@ -186,6 +200,20 @@ describe('Loader', function() {
 
     checkResult(loadedString, result);
   });
+
+  it ('should return a loadChildren chunkName dynamic import statement', function() {
+    var result = [
+      'loadChildren: () => import(/* webpackChunkName: "name" */ \'./path/to/file.module\')',
+      '  .then(module => module[\'FileModule\'])'
+    ];
+
+    var loadedString = loader.call({
+      resourcePath: resourcePath,
+      query: '?loader=import'
+    }, `loadChildren: '${modulePath}?chunkName=name'`);
+
+    checkResult(loadedString, result);
+  });  
 
   it('should return a loadChildren async require statement with default', function() {
     var modulePath = './path/to/file.module';

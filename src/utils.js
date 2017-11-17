@@ -19,31 +19,30 @@ module.exports.getSyncLoader = function(filePath, moduleName, inline) {
 
 module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inline, isJs) {
   var requireString = module.exports.getRequireString(filePath, moduleName);
-  var webpackChunkName = chunkName ? ', \'' + chunkName + '\'' : '';
 
   var result = [
     'loadChildren: () => new Promise(function (resolve) {',
     '  ' + (isJs ? 'require' : '(require as any)') + '.ensure([], function (' + (isJs ? 'require' : 'require: any') + ') {',
     '    resolve(' + requireString + ');',
-    '  }' + webpackChunkName + ');',
+    '  }' + module.exports.getChunkName('require', chunkName) + ');',
     '})'
   ];
 
   return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getSystemLoader = function(filePath, moduleName, inline) {
+module.exports.getSystemLoader = function(filePath, moduleName, inline, chunkName) {
   var result = [
-    'loadChildren: () => System.import(\'' + filePath + '\')',
+    'loadChildren: () => System.import(' + module.exports.getChunkName('system', chunkName) + '\'' + filePath + '\')',
     '  .then(module => module[\'' + moduleName + '\'])'
   ];
 
   return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getImportLoader = function(filePath, moduleName, inline) {
+module.exports.getImportLoader = function(filePath, moduleName, inline, chunkName) {
   var result = [
-    'loadChildren: () => import(\'' + filePath + '\')',
+    'loadChildren: () => import(' + module.exports.getChunkName('import', chunkName) + '\'' + filePath + '\')',
     '  .then(module => module[\'' + moduleName + '\'])'
   ];
 
@@ -69,4 +68,14 @@ module.exports.normalizeFilePath = function(filePath, relativePathMatch) {
   }
 
   return newPath;
+}
+
+module.exports.getChunkName = function (loader, chunkName) {
+  if (chunkName && (loader === 'import' || loader === 'system')) {
+    return '/* webpackChunkName: "' + chunkName + '" */ ';
+  } else if (chunkName && loader == 'require') {
+    return ', \'' + chunkName + '\'';
+  }
+
+  return '';
 }
