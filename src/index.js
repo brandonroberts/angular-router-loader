@@ -89,9 +89,9 @@ module.exports = function(source, sourcemap) {
     if (sync) {
       replacement = utils.getSyncLoader(filePath, moduleName, inline);
     } else if (loader === 'system') {
-      replacement = utils.getSystemLoader(filePath, moduleName, inline);
+      replacement = utils.getSystemLoader(filePath, moduleName, inline, chunkName);
     } else if (loader === 'import') {
-      replacement = utils.getImportLoader(filePath, moduleName, inline);
+      replacement = utils.getImportLoader(filePath, moduleName, inline, chunkName);
     } else {
       replacement = utils.getRequireLoader(filePath, chunkName, moduleName, inline, isJs);
     }

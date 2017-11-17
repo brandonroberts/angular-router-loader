@@ -151,7 +151,7 @@ replacement
 
 ## Lazy Loading Options
 
-### chunkName (require loader only)
+### chunkName
 
 Allows you to provide [named chunks](http://webpack.github.io/docs/code-splitting.html#named-chunks) for code splitting.
 
@@ -163,7 +163,7 @@ original
 }
 ```
 
-replacement
+replacement (require loader)
 ```ts
 {
   path: 'lazy',
@@ -172,5 +172,21 @@ replacement
       resolve(require('./lazy/lazy.module')['LazyModule']);
     }, 'MyChunk');
   })
+}
+```
+
+replacement (system loader)
+```ts
+{
+  path: 'lazy',
+  loadChildren: () => System.import(/* webpackChunkName: "MyChunk" */ './lazy/lazy.module').then(module => module['LazyModule'])
+}
+```
+
+replacement (import loader)
+```ts
+{
+  path: 'lazy',
+  loadChildren: () => import(/* webpackChunkName: "MyChunk" */ './lazy/lazy.module').then(module => module['LazyModule'])
 }
 ```
