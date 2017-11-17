@@ -32,5 +32,8 @@
     "mocha": "^3.0.2",
     "pmock": "^0.2.3",
     "should": "^11.1.0"
+  },
+  "peerDependencies": {
+    "webpack": ">=2.4.0"
   }
 }
