@@ -1,3 +1,27 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.7.0...v0.8.0) (2017-11-17)
+
+
+### Features
+
+* **loader:** Add promise rejection upon loader error ([#94](https://github.com/brandonroberts/angular-router-loader/issues/94)) ([68d89ff](https://github.com/brandonroberts/angular-router-loader/commit/68d89ff)), closes [#75](https://github.com/brandonroberts/angular-router-loader/issues/75)
+* **loader:** Add support for chunk name to system && import loaders ([#93](https://github.com/brandonroberts/angular-router-loader/issues/93)) ([df345fc](https://github.com/brandonroberts/angular-router-loader/commit/df345fc))
+
+
+### BREAKING CHANGES
+
+* **loader:** Webpack >= 2.4 is required for the error callback to be supported with require.ensure
+
+BEFORE:
+
+Webpack < 2.4 is supported
+
+AFTER:
+
+Webpack >= 2.4 is supported
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.6.0...v0.7.0) (2017-11-14)
 
