@@ -58,13 +58,13 @@ describe('Utils', function() {
 
     it('should return an asynchronous require loadChildren statement with vanilla javascript', function() {
       var result = [
-        'loadChildren: () => new Promise(function (resolve, reject) {',
+        'loadChildren: function () { return new Promise(function (resolve, reject) {',
         '  require.ensure([], function (require) {',
         '    resolve(' + getRequireString(path, name) + ');',
         '  }, function () {',
         '    reject({ loadChunkError: true });',
         '  }, \'name\');',  
-        '})'
+        '})}'
       ];
       getRequireLoader('path', 'name', 'name', true, true).should.eql(result.join(''));
     });
