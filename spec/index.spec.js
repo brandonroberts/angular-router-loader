@@ -118,13 +118,13 @@ describe('Loader', function() {
 
   it('should return a plain javascript loadChildren async require statement', function() {
     var result = [
-      'loadChildren: () => new Promise(function (resolve, reject) {',
+      'loadChildren: function () { return new Promise(function (resolve, reject) {',
       '  require.ensure([], function (require) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
       '  }, function () {',
       '    reject({ loadChunkError: true });',
       '  });',
-      '})'
+      '})}'
     ];
 
     var loadedString = loader.call({
