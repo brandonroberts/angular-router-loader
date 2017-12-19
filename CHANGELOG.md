@@ -1,3 +1,13 @@
+<a name="0.8.1"></a>
+## [0.8.1](https://github.com/brandonroberts/angular-router-loader/compare/v0.8.0...v0.8.1) (2017-12-19)
+
+
+### Bug Fixes
+
+* **utils:** Update vanilla JS require loader to be fully ES5 ([#98](https://github.com/brandonroberts/angular-router-loader/issues/98)) ([e6d9d88](https://github.com/brandonroberts/angular-router-loader/commit/e6d9d88))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.7.0...v0.8.0) (2017-11-17)
 
