@@ -124,7 +124,7 @@ describe('Loader', function() {
       '  }, function() {',
       '    reject({ loadChunkError: true });',
       '  });',
-      '})}'
+      '}) }'
     ];
 
     var loadedString = loader.call({
