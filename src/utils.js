@@ -21,10 +21,10 @@ module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inli
   var requireString = module.exports.getRequireString(filePath, moduleName);
 
   var result = [
-    'loadChildren: function () { return new Promise(function (resolve, reject) {',
+    'loadChildren: function() { return new Promise(function (resolve, reject) {',
     '  ' + (isJs ? 'require' : '(require as any)') + '.ensure([], function (' + (isJs ? 'require' : 'require: any') + ') {',
     '    resolve(' + requireString + ');',
-    '  }, function () {',
+    '  }, function() {',
     '    reject({ loadChunkError: true });',
     '  }' + module.exports.getChunkName('require', chunkName) + ');',
     '}) }'
