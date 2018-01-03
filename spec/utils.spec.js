@@ -32,39 +32,39 @@ describe('Utils', function() {
 
     it('should return an asynchronous require loadChildren statement with chunkName parameter', function() {
       var result = [
-        'loadChildren: () => new Promise(function (resolve, reject) {',
+        'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function () {',
+        '  }, function() {',
         '    reject({ loadChunkError: true });',
         '  }, \'name\');',  
-        '})'
+        '}) }'
       ];
       getRequireLoader('path', 'name', 'name', true).should.eql(result.join(''));
     });
 
     it('should return an asynchronous require loadChildren statement without chunkName parameter', function() {
       var result = [
-        'loadChildren: () => new Promise(function (resolve, reject) {',
+        'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function () {',
+        '  }, function() {',
         '    reject({ loadChunkError: true });',
         '  });',  
-        '})'
+        '}) }'
       ];
       getRequireLoader('path', undefined, 'name', true).should.eql(result.join(''));
     });
 
     it('should return an asynchronous require loadChildren statement with vanilla javascript', function() {
       var result = [
-        'loadChildren: function () { return new Promise(function (resolve, reject) {',
+        'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  require.ensure([], function (require) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function () {',
+        '  }, function() {',
         '    reject({ loadChunkError: true });',
         '  }, \'name\');',  
-        '})}'
+        '}) }'
       ];
       getRequireLoader('path', 'name', 'name', true, true).should.eql(result.join(''));
     });
@@ -76,8 +76,8 @@ describe('Utils', function() {
 
     it('should return an asynchronous System.import loadChildren statement', function() {
       var result = [
-        'loadChildren: () => System.import(\'' + path + '\')',
-        '  .then(module => module[\'' + name + '\'], () => { throw({ loadChunkError: true }); })'
+        'loadChildren: function() { return System.import(\'' + path + '\')',
+        '  .then(module => module[\'' + name + '\'], () => { throw({ loadChunkError: true }); }) }'
       ];
 
       getSystemLoader('path', 'name', true).should.eql(result.join(''));
@@ -89,8 +89,8 @@ describe('Utils', function() {
 
     it('should return an asynchronous dynamic import loadChildren statement', function() {
       var result = [
-        'loadChildren: () => import(\'' + path + '\')',
-        '  .then(module => module[\'' + name + '\'], () => { throw({ loadChunkError: true }); })'
+        'loadChildren: function() { return import(\'' + path + '\')',
+        '  .then(module => module[\'' + name + '\'], () => { throw({ loadChunkError: true }); }) }'
       ];
 
       getImportLoader('path', 'name', true).should.eql(result.join(''));

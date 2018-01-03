@@ -21,13 +21,13 @@ module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inli
   var requireString = module.exports.getRequireString(filePath, moduleName);
 
   var result = [
-    'loadChildren: '+ (isJs ? 'function () { return' : '() =>') + ' new Promise(function (resolve, reject) {',
+    'loadChildren: function() { return new Promise(function (resolve, reject) {',
     '  ' + (isJs ? 'require' : '(require as any)') + '.ensure([], function (' + (isJs ? 'require' : 'require: any') + ') {',
     '    resolve(' + requireString + ');',
-    '  }, function () {',
+    '  }, function() {',
     '    reject({ loadChunkError: true });',
     '  }' + module.exports.getChunkName('require', chunkName) + ');',
-    '})' + (isJs ? '}' : '')
+    '}) }'
   ];
 
   return inline ? result.join('') : result.join('\n');
@@ -35,8 +35,8 @@ module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inli
 
 module.exports.getSystemLoader = function(filePath, moduleName, inline, chunkName) {
   var result = [
-    'loadChildren: () => System.import(' + module.exports.getChunkName('system', chunkName) + '\'' + filePath + '\')',
-    '  .then(module => module[\'' + moduleName + '\'], () => { throw({ loadChunkError: true }); })'
+    'loadChildren: function() { return System.import(' + module.exports.getChunkName('system', chunkName) + '\'' + filePath + '\')',
+    '  .then(module => module[\'' + moduleName + '\'], () => { throw({ loadChunkError: true }); }) }'
   ];
 
   return inline ? result.join('') : result.join('\n');
@@ -44,8 +44,8 @@ module.exports.getSystemLoader = function(filePath, moduleName, inline, chunkNam
 
 module.exports.getImportLoader = function(filePath, moduleName, inline, chunkName) {
   var result = [
-    'loadChildren: () => import(' + module.exports.getChunkName('import', chunkName) + '\'' + filePath + '\')',
-    '  .then(module => module[\'' + moduleName + '\'], () => { throw({ loadChunkError: true }); })'
+    'loadChildren: function() { return import(' + module.exports.getChunkName('import', chunkName) + '\'' + filePath + '\')',
+    '  .then(module => module[\'' + moduleName + '\'], () => { throw({ loadChunkError: true }); }) }'
   ];
 
   return inline ? result.join('') : result.join('\n');
