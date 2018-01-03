@@ -1,3 +1,8 @@
+<a name="0.8.2"></a>
+## [0.8.2](https://github.com/brandonroberts/angular-router-loader/compare/v0.8.1...v0.8.2) (2018-01-03)
+
+
+
 <a name="0.8.1"></a>
 ## [0.8.1](https://github.com/brandonroberts/angular-router-loader/compare/v0.8.0...v0.8.1) (2017-12-19)
 
@@ -90,17 +95,12 @@ Webpack >= 2.4 is supported
 
 
 <a name="0.3.1"></a>
-## [0.3.1](https://github.com/brandonroberts/angular-router-loader/compare/v0.3.0...v0.3.1) (2016-10-07)
+## [0.3.1](https://github.com/brandonroberts/angular-router-loader/compare/v0.2.2...v0.3.1) (2016-10-07)
 
 
 ### Bug Fixes
 
 * **loader:** Fixed files without a relative path. ([01fb92e](https://github.com/brandonroberts/angular-router-loader/commit/01fb92e))
-
-
-
-<a name="0.3.0"></a>
-# [0.3.0](https://github.com/brandonroberts/angular-router-loader/compare/v0.2.2...v0.3.0) (2016-10-04)
 
 
 ### Features
