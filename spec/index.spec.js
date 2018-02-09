@@ -48,8 +48,8 @@ describe('Loader', function() {
           'loadChildren: function() { return new Promise(function (resolve, reject) {',
           '  (require as any).ensure([], function (require: any) {',
           '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-          '  }, function() {',
-          '    reject({ loadChunkError: true });',
+          '  }, function(e) {',
+          '    reject({ loadChunkError: true, details: e });',
           '  });',
           '}) }'
         ];
@@ -78,8 +78,8 @@ describe('Loader', function() {
             'loadChildren: function() { return new Promise(function (resolve, reject) {',
             '  (require as any).ensure([], function (require: any) {',
             '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-            '  }, function() {',
-            '    reject({ loadChunkError: true });',
+            '  }, function(e) {',
+            '    reject({ loadChunkError: true, details: e });',
             '  });',
             '}) }'
           ];
@@ -102,8 +102,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
     ];
@@ -121,8 +121,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  require.ensure([], function (require) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
     ];
@@ -155,8 +155,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  }, \'name\');',
       '}) }'
     ];
@@ -172,7 +172,7 @@ describe('Loader', function() {
   it ('should return a loadChildren System.import statement', function() {
     var result = [
       'loadChildren: function() { return System.import(\'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], () => { throw({ loadChunkError: true }); }) }'
+      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -186,7 +186,7 @@ describe('Loader', function() {
   it ('should return a loadChildren chunkName System.import statement', function() {
     var result = [
       'loadChildren: function() { return System.import(/* webpackChunkName: "name" */ \'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], () => { throw({ loadChunkError: true }); }) }'
+      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -200,7 +200,7 @@ describe('Loader', function() {
   it ('should return a loadChildren dynamic import statement', function() {
     var result = [
       'loadChildren: function() { return import(\'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], () => { throw({ loadChunkError: true }); }) }'
+      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -214,7 +214,7 @@ describe('Loader', function() {
   it ('should return a loadChildren chunkName dynamic import statement', function() {
     var result = [
       'loadChildren: function() { return import(/* webpackChunkName: "name" */ \'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], () => { throw({ loadChunkError: true }); }) }'
+      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -232,8 +232,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'default\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
     ];
@@ -251,8 +251,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
     ];
@@ -273,8 +273,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
     ];
@@ -294,8 +294,8 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'path/to/file.module\')[\'FileModule\']);',
-      '  }, function() {',
-      '    reject({ loadChunkError: true });',
+      '  }, function(e) {',
+      '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
     ];
@@ -318,8 +318,8 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'./path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
       ];
@@ -350,7 +350,7 @@ describe('Loader', function() {
     it ('should return a loadChildren System.import statement', function() {
       var result = [
         'loadChildren: function() { return System.import(\'./path/to/file.module.ngfactory\')',
-        '  .then(module => module[\'FileModuleNgFactory\'], () => { throw({ loadChunkError: true }); }) }'
+        '  .then(module => module[\'FileModuleNgFactory\'], e => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       var loadedString = loader.call({
@@ -364,7 +364,7 @@ describe('Loader', function() {
     it ('should return a loadChildren dynamic import statement', function() {
       var result = [
         'loadChildren: function() { return import(\'./path/to/file.module.ngfactory\')',
-        '  .then(module => module[\'FileModuleNgFactory\'], () => { throw({ loadChunkError: true }); }) }'
+        '  .then(module => module[\'FileModuleNgFactory\'], e => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       var loadedString = loader.call({
@@ -382,8 +382,8 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'./path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
       ];
@@ -403,8 +403,8 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'./path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  });',
         '}) }'
       ];
@@ -422,8 +422,8 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
       ];
@@ -450,8 +450,8 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../../compiled/src/app/groups/inventory/index.ngfactory\')[\'InventoryModuleNgFactory\']);',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
       ];
