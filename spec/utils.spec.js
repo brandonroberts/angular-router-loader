@@ -35,8 +35,8 @@ describe('Utils', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  }, \'name\');',  
         '}) }'
       ];
@@ -48,8 +48,8 @@ describe('Utils', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
       ];
@@ -61,8 +61,8 @@ describe('Utils', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  require.ensure([], function (require) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function() {',
-        '    reject({ loadChunkError: true });',
+        '  }, function(e) {',
+        '    reject({ loadChunkError: true, details: e });',
         '  }, \'name\');',  
         '}) }'
       ];
@@ -77,7 +77,7 @@ describe('Utils', function() {
     it('should return an asynchronous System.import loadChildren statement', function() {
       var result = [
         'loadChildren: function() { return System.import(\'' + path + '\')',
-        '  .then(module => module[\'' + name + '\'], () => { throw({ loadChunkError: true }); }) }'
+        '  .then(module => module[\'' + name + '\'], e => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       getSystemLoader('path', 'name', true).should.eql(result.join(''));
@@ -90,7 +90,7 @@ describe('Utils', function() {
     it('should return an asynchronous dynamic import loadChildren statement', function() {
       var result = [
         'loadChildren: function() { return import(\'' + path + '\')',
-        '  .then(module => module[\'' + name + '\'], () => { throw({ loadChunkError: true }); }) }'
+        '  .then(module => module[\'' + name + '\'], e => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       getImportLoader('path', 'name', true).should.eql(result.join(''));
