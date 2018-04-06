@@ -1,8 +1,3 @@
-<a name="0.8.4"></a>
-## [0.8.4](https://github.com/brandonroberts/angular-router-loader/compare/v0.8.3...v0.8.4) (2018-04-06)
-
-
-
 <a name="0.8.3"></a>
 ## [0.8.3](https://github.com/brandonroberts/angular-router-loader/compare/v0.8.2...v0.8.3) (2018-04-05)
 
