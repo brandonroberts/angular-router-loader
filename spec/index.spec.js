@@ -172,7 +172,7 @@ describe('Loader', function() {
   it ('should return a loadChildren System.import statement', function() {
     var result = [
       'loadChildren: function() { return System.import(\'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
+      '  .then(module => module[\'FileModule\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -186,7 +186,7 @@ describe('Loader', function() {
   it ('should return a loadChildren chunkName System.import statement', function() {
     var result = [
       'loadChildren: function() { return System.import(/* webpackChunkName: "name" */ \'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
+      '  .then(module => module[\'FileModule\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -200,7 +200,7 @@ describe('Loader', function() {
   it ('should return a loadChildren dynamic import statement', function() {
     var result = [
       'loadChildren: function() { return import(\'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
+      '  .then(module => module[\'FileModule\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -214,7 +214,7 @@ describe('Loader', function() {
   it ('should return a loadChildren chunkName dynamic import statement', function() {
     var result = [
       'loadChildren: function() { return import(/* webpackChunkName: "name" */ \'./path/to/file.module\')',
-      '  .then(module => module[\'FileModule\'], e => { throw({ loadChunkError: true, details: e }); }) }'
+      '  .then(module => module[\'FileModule\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
     ];
 
     var loadedString = loader.call({
@@ -350,7 +350,7 @@ describe('Loader', function() {
     it ('should return a loadChildren System.import statement', function() {
       var result = [
         'loadChildren: function() { return System.import(\'./path/to/file.module.ngfactory\')',
-        '  .then(module => module[\'FileModuleNgFactory\'], e => { throw({ loadChunkError: true, details: e }); }) }'
+        '  .then(module => module[\'FileModuleNgFactory\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       var loadedString = loader.call({
@@ -364,7 +364,7 @@ describe('Loader', function() {
     it ('should return a loadChildren dynamic import statement', function() {
       var result = [
         'loadChildren: function() { return import(\'./path/to/file.module.ngfactory\')',
-        '  .then(module => module[\'FileModuleNgFactory\'], e => { throw({ loadChunkError: true, details: e }); }) }'
+        '  .then(module => module[\'FileModuleNgFactory\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       var loadedString = loader.call({
