@@ -77,7 +77,7 @@ describe('Utils', function() {
     it('should return an asynchronous System.import loadChildren statement', function() {
       var result = [
         'loadChildren: function() { return System.import(\'' + path + '\')',
-        '  .then(module => module[\'' + name + '\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
+        '  .then(module => module[\'' + name + '\'], (e: any) => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       getSystemLoader('path', 'name', true).should.eql(result.join(''));
@@ -90,7 +90,7 @@ describe('Utils', function() {
     it('should return an asynchronous dynamic import loadChildren statement', function() {
       var result = [
         'loadChildren: function() { return import(\'' + path + '\')',
-        '  .then(module => module[\'' + name + '\'], e: any => { throw({ loadChunkError: true, details: e }); }) }'
+        '  .then(module => module[\'' + name + '\'], (e: any) => { throw({ loadChunkError: true, details: e }); }) }'
       ];
 
       getImportLoader('path', 'name', true).should.eql(result.join(''));
