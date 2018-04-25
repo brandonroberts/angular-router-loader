@@ -24,7 +24,7 @@ module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inli
     'loadChildren: function() { return new Promise(function (resolve, reject) {',
     '  ' + (isJs ? 'require' : '(require as any)') + '.ensure([], function (' + (isJs ? 'require' : 'require: any') + ') {',
     '    resolve(' + requireString + ');',
-    '  }, function(e: any) {',
+    '  }, (e: any) => {',
     '    reject({ loadChunkError: true, details: e });',
     '  }' + module.exports.getChunkName('require', chunkName) + ');',
     '}) }'
