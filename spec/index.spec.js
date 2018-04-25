@@ -121,7 +121,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  require.ensure([], function (require) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, (e: any) => {',
+      '  }, e => {',
       '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
@@ -223,7 +223,7 @@ describe('Loader', function() {
     }, `loadChildren: '${modulePath}?chunkName=name'`);
 
     checkResult(loadedString, result);
-  });  
+  });
 
   it('should return a loadChildren async require statement with default', function() {
     var modulePath = './path/to/file.module';

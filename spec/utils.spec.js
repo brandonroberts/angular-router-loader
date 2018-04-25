@@ -61,7 +61,7 @@ describe('Utils', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  require.ensure([], function (require) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, (e: any) => {',
+        '  }, e => {',
         '    reject({ loadChunkError: true, details: e });',
         '  }, \'name\');',  
         '}) }'
