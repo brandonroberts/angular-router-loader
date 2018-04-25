@@ -48,7 +48,7 @@ describe('Loader', function() {
           'loadChildren: function() { return new Promise(function (resolve, reject) {',
           '  (require as any).ensure([], function (require: any) {',
           '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-          '  }, function(e) {',
+          '  }, function(e: any) {',
           '    reject({ loadChunkError: true, details: e });',
           '  });',
           '}) }'
@@ -78,7 +78,7 @@ describe('Loader', function() {
             'loadChildren: function() { return new Promise(function (resolve, reject) {',
             '  (require as any).ensure([], function (require: any) {',
             '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-            '  }, function(e) {',
+            '  }, function(e: any) {',
             '    reject({ loadChunkError: true, details: e });',
             '  });',
             '}) }'
@@ -102,7 +102,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function(e) {',
+      '  }, function(e: any) {',
       '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
@@ -155,7 +155,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function(e) {',
+      '  }, function(e: any) {',
       '    reject({ loadChunkError: true, details: e });',
       '  }, \'name\');',
       '}) }'
@@ -223,7 +223,7 @@ describe('Loader', function() {
     }, `loadChildren: '${modulePath}?chunkName=name'`);
 
     checkResult(loadedString, result);
-  });  
+  });
 
   it('should return a loadChildren async require statement with default', function() {
     var modulePath = './path/to/file.module';
@@ -232,7 +232,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'default\']);',
-      '  }, function(e) {',
+      '  }, function(e: any) {',
       '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
@@ -251,7 +251,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'./path/to/file.module\')[\'FileModule\']);',
-      '  }, function(e) {',
+      '  }, function(e: any) {',
       '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
@@ -273,7 +273,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'.\\\\path\\\\to\\\\file.module\')[\'FileModule\']);',
-      '  }, function(e) {',
+      '  }, function(e: any) {',
       '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
@@ -294,7 +294,7 @@ describe('Loader', function() {
       'loadChildren: function() { return new Promise(function (resolve, reject) {',
       '  (require as any).ensure([], function (require: any) {',
       '    resolve(require(\'path/to/file.module\')[\'FileModule\']);',
-      '  }, function(e) {',
+      '  }, function(e: any) {',
       '    reject({ loadChunkError: true, details: e });',
       '  });',
       '}) }'
@@ -318,9 +318,9 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'./path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
-        '  });',  
+        '  });',
         '}) }'
       ];
 
@@ -382,9 +382,9 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'./path/to/file.module' + moduleSuffix + '\')[\'FileModuleNgFactory\']);',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
-        '  });',  
+        '  });',
         '}) }'
       ];
 
@@ -403,7 +403,7 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'./path/to/file.module.ngfactory\')[\'FileModule' + factorySuffix + '\']);',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
         '  });',
         '}) }'
@@ -422,9 +422,9 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'path/to/file.module.ngfactory\')[\'FileModuleNgFactory\']);',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
-        '  });',  
+        '  });',
         '}) }'
       ];
 
@@ -450,7 +450,7 @@ describe('Loader', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(require(\'../../../compiled/src/app/groups/inventory/index.ngfactory\')[\'InventoryModuleNgFactory\']);',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
