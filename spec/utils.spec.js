@@ -35,7 +35,7 @@ describe('Utils', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
         '  }, \'name\');',  
         '}) }'
@@ -48,7 +48,7 @@ describe('Utils', function() {
         'loadChildren: function() { return new Promise(function (resolve, reject) {',
         '  (require as any).ensure([], function (require: any) {',
         '    resolve(' + getRequireString(path, name) + ');',
-        '  }, function(e) {',
+        '  }, function(e: any) {',
         '    reject({ loadChunkError: true, details: e });',
         '  });',  
         '}) }'
