@@ -33,19 +33,19 @@ module.exports.getRequireLoader = function(filePath, chunkName, moduleName, inli
   return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getSystemLoader = function(filePath, moduleName, inline, chunkName) {
+module.exports.getSystemLoader = function(filePath, moduleName, inline, chunkName, isJs) {
   var result = [
     'loadChildren: function() { return System.import(' + module.exports.getChunkName('system', chunkName) + '\'' + filePath + '\')',
-    '  .then(module => module[\'' + moduleName + '\'], (e: any) => { throw({ loadChunkError: true, details: e }); }) }'
+    '  .then(module => module[\'' + moduleName + '\'], (' + (isJs ? 'e' : 'e: any') + ') => { throw({ loadChunkError: true, details: e }); }) }'
   ];
 
   return inline ? result.join('') : result.join('\n');
 };
 
-module.exports.getImportLoader = function(filePath, moduleName, inline, chunkName) {
+module.exports.getImportLoader = function(filePath, moduleName, inline, chunkName, isJs) {
   var result = [
     'loadChildren: function() { return import(' + module.exports.getChunkName('import', chunkName) + '\'' + filePath + '\')',
-    '  .then(module => module[\'' + moduleName + '\'], (e: any) => { throw({ loadChunkError: true, details: e }); }) }'
+    '  .then(module => module[\'' + moduleName + '\'], (' + (isJs ? 'e' : 'e: any') + ') => { throw({ loadChunkError: true, details: e }); }) }'
   ];
 
   return inline ? result.join('') : result.join('\n');
