@@ -9,6 +9,8 @@ describe('Loader', function() {
 
   var resourcePath = 'path/to/routes.ts';
   var modulePath = './path/to/file.module#FileModule';
+  var newModulePath = './path/to/file.module';
+  var newModuleName = 'FileModule';
   var query = '';
 
   describe('should match', function() {
@@ -38,7 +40,13 @@ describe('Loader', function() {
       `'loadChildren' : "${modulePath}"`,
       `'loadChildren' :  "${modulePath}"`,
       `'loadChildren'  :"${modulePath}"`,
-      `'loadChildren'  : "${modulePath}"`
+      `'loadChildren'  : "${modulePath}"`,
+
+      `loadChildren:()=>import("${newModulePath}").then(m=>m.${newModuleName})`,
+      `loadChildren : (  ) => import ( "${newModulePath}" ) . then ( m => m . ${newModuleName} )`,
+      `loadChildren : () => import ('${newModulePath}').then(m => m.${newModuleName})`,
+      `'loadChildren':()=>import("${newModulePath}").then(m => m.${newModuleName})`,
+      `"loadChildren":()=>import("${newModulePath}").then(m => m.${newModuleName})`,
     ];
 
     loadStrings.forEach(function(loadString) {
@@ -69,7 +77,9 @@ describe('Loader', function() {
       var loadStrings = [
         `loadChildren: \`${modulePath}\``,
         `loadChildren : () => {}`,
-        `loadChildren: someFunction('./')`
+        `loadChildren: someFunction('./')`,
+        `loadChildren : () = > import("${newModulePath}").then(m => m.${newModuleName})`,
+        `loadChildren : () => import("${newModulePath}").then(m = > m.${newModuleName})`,
       ];
 
       loadStrings.forEach(function(loadString) {
